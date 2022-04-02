@@ -1,0 +1,138 @@
+{
+  "data": [
+    {
+      "goodscategory": {
+        "goodsitem": [
+          {
+            "name": "双拼鸡公煲加肥牛",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": true,
+            "specifications": [ "微辣", "中辣", "重辣" ]
+          },
+          {
+            "name": "单人套餐",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": true,
+            "specifications": [ "微麻", "中麻", "重麻" ]
+          },
+          {
+            "name": "单人套餐",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "单人套餐1",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "单人套餐1",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          }
+        ],
+        "name": "套餐"
+      }
+    },
+    {
+      "goodscategory":
+      {
+        "goodsitem": [
+          {
+            "name": "番茄",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "西葫芦",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "西兰花",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "白菜",
+            "price": 12,
+            "introduce": "apple",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          }
+        ],
+        "name": "蔬菜"
+      }
+
+    },
+    {
+    "goodscategory":
+    {
+      "goodsitem": [
+        {
+          "name": "红牛",
+          "price": 12,
+          "introduce": "apple",
+          "goodsImgUrl": "xxxxx",
+          "moreStandard": false
+        },
+        {
+          "name": "哇哈哈",
+          "price": 12,
+          "introduce": "apple",
+          "goodsImgUrl": "xxxxx",
+          "moreStandard": false
+        },
+        {
+          "name": "无糖百事",
+          "price": 12,
+          "introduce": "apple",
+          "goodsImgUrl": "xxxxx",
+          "moreStandard": false
+        },
+        {
+          "name": "果粒橙",
+          "price": 12,
+          "introduce": "apple",
+          "goodsImgUrl": "xxxxx",
+          "moreStandard": false
+        },
+        {
+          "name": "怡宝",
+          "price": 12,
+          "introduce": "apple",
+          "goodsImgUrl": "xxxxx",
+          "moreStandard": false
+        },
+        {
+          "name": "农夫山泉",
+          "price": 12,
+          "introduce": "apple",
+          "goodsImgUrl": "xxxxx",
+          "moreStandard": false
+
+        }
+      ],
+      "name": "饮料"
+    }
+  
+		}
+	
+	
+]}
