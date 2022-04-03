@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
                 Log.v("test","current index is"+currentPos);
             } else {
                 // 如果处于拖拽状态停止自动播放，会每隔0.5秒检查一次是否可以正常自动播放。
-                handler.postDelayed(task, 6000);
+                handler.postDelayed(task, 500);
             }
         }
     };
@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private  void initImage(){
-        int[] resIds=new int[]{R.drawable.image1,R.drawable.image2,R.drawable.image3};
+        int[] resIds=new int[]{R.drawable.img_one,R.drawable.img_two,R.drawable.img_three,R.drawable.img_four,R.drawable.img_five};
         ArrayList<ImageView> images=new ArrayList<>();
         initImages(images,resIds);
         imageAdapter=new ImageAdapter(this,images);

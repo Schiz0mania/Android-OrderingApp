@@ -7,7 +7,7 @@
             "name": "双拼鸡公煲加肥牛",
             "price": 12,
             "introduce": "apple",
-            "goodsImgUrl": "xxxxx",
+            "goodsImgUrl": "http://i.imgur.com/idojSYm.png",
             "moreStandard": true,
             "specifications": [ "微辣", "中辣", "重辣" ]
           },
@@ -15,7 +15,7 @@
             "name": "单人套餐",
             "price": 12,
             "introduce": "apple",
-            "goodsImgUrl": "xxxxx",
+            "goodsImgUrl": "",
             "moreStandard": true,
             "specifications": [ "微麻", "中麻", "重麻" ]
           },

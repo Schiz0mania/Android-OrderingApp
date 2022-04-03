@@ -204,6 +204,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                 .crossFade()
                 .into(holder.ivGoodsImage);
 
+
+
         //通过判别对应位置的数量是否大于0来显示隐藏数量
         isSelected(goodsNum[position], holder,dataList.get(position).isMoreStandard());
 
