@@ -12,10 +12,11 @@ public class BaseActivity extends AppCompatActivity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
         setStatusBar();
-    }
 
+    }
 
     protected void setStatusBar() {
 
     }
+
 }

@@ -19,10 +19,13 @@ import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
@@ -51,18 +54,48 @@ public class MainActivity extends BaseActivity {
     private TextView noShop;
     private RelativeLayout shopCartMain;
     private ViewGroup anim_mask_layout;//动画层
+
+
     private Button checkoutBtn;
 
+
+    private ViewPager imgVp;
+    private ImageAdapter imageAdapter;
+    private int FIRST_ITEM_INDEX;
+    private int LAST_ITEM_INDEX;
+    private int currentPos;
+    //private boolean isChanged;
+    private boolean isAuto;
+    private android.os.Handler handler;
+
+    private Runnable task = new Runnable() {
+        @Override
+        public void run() {
+
+            if (isAuto) {
+                // 位置循环
+                currentPos = currentPos+1 % 3;
+
+                // 正常每隔3秒播放一张图片
+                imgVp.setCurrentItem(currentPos,false);
+                handler.postDelayed(task, 3000);
+                Log.v("test","current index is"+currentPos);
+            } else {
+                // 如果处于拖拽状态停止自动播放，会每隔0.5秒检查一次是否可以正常自动播放。
+                handler.postDelayed(task, 6000);
+            }
+        }
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);//注册
-
         setContentView(R.layout.activity_main);
         setCollsapsing();
         initView();
+        initImage();
         setViewPager();
 
     }
@@ -76,9 +109,45 @@ public class MainActivity extends BaseActivity {
         shopCartNum=(TextView)findViewById(R.id.shopCartNum);
         totalPrice=(TextView)findViewById(R.id.totalPrice);
         noShop=(TextView)findViewById(R.id.noShop);
+        imgVp=findViewById(R.id.scrollView);
+        handler = new android.os.Handler();
+        task.run();
 
 
     }
+
+    private  void initImage(){
+        int[] resIds=new int[]{R.drawable.image1,R.drawable.image2,R.drawable.image3};
+        ArrayList<ImageView> images=new ArrayList<>();
+        initImages(images,resIds);
+        imageAdapter=new ImageAdapter(this,images);
+        imgVp.setAdapter(imageAdapter);
+        imgVp.setCurrentItem(1);
+        FIRST_ITEM_INDEX=1;
+        LAST_ITEM_INDEX=images.size()-2;
+        isAuto = true;
+    }
+    private void initImages(ArrayList<ImageView> images,int[] resIds){
+        images.add(createImage(resIds[resIds.length-1]));
+        for(int i=0;i<resIds.length;i++){
+            images.add(createImage(resIds[i]));
+        }
+        images.add(createImage(resIds[0]));
+    }
+    private ImageView createImage(int resId){
+        ImageView img=new ImageView(this);
+        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        Glide.with(this)
+                .load(resId)
+                .dontAnimate()
+                .into(img);
+        return img;
+    }
+
+
+
+
+
 
     private void setViewPager() {
 
@@ -92,6 +161,7 @@ public class MainActivity extends BaseActivity {
 
         adapter=new TabFragmentAdapter(getSupportFragmentManager(),mFragments,mTitles);
         viewPager.setAdapter(adapter);
+        imgVp.setAdapter(imageAdapter);
         slidingTabLayout.setupWithViewPager(viewPager);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -119,6 +189,43 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+        imgVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            private int position;
+            private int oldpos;
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                this.position=position;
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                // 以下实现无限滚动
+                if(position>LAST_ITEM_INDEX){
+                    currentPos=FIRST_ITEM_INDEX;
+                }else if(position<FIRST_ITEM_INDEX){
+                    currentPos=LAST_ITEM_INDEX;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                switch(state){
+                    case 0: //无位移操作
+                        isAuto=true;
+                        break;
+                    case 1://手指在滑动
+                        isAuto=false;
+                        break;
+                    case 2:// 页面在执行滑动，手指已离开
+                        isAuto=true;
+                        break;
+
+
+                }
+            }
+        });
+
 
 
     }
@@ -141,8 +248,6 @@ public class MainActivity extends BaseActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-
-
 
 
 
@@ -284,5 +389,6 @@ public class MainActivity extends BaseActivity {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+
     }
 }
