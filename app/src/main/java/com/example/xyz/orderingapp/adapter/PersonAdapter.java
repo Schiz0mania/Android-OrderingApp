@@ -38,7 +38,9 @@ import java.util.List;
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder>{
     private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> dataList;
     private Context mContext;
-    private int[] goodsNum;
+
+    private int[] goodsNum;//-----单个商品的购买个数
+
     private int buyNum;
     private int totalPrice;
     private int[] mSectionIndices;
@@ -48,7 +50,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     private ImageView buyImg;
     private List<GoodsListBean.DataEntity.GoodscategoryEntity> goodscategoryEntities;
     private String[] mSectionLetters;
-    private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> selectGoods=new ArrayList<>();
+    private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> selectGoods=new ArrayList<>(); // 保存用户购买的商品类个例
 
 
     public PersonAdapter(Context context, List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> items
@@ -225,7 +227,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                         holder.scaleBtn.setVisibility(View.GONE);
                 }
                 startAnim(holder.ivGoodsAdd);
-                changeShopCart();
+
+                changeShopCart(position,1);
+
                 if(mOnGoodsNunChangeListener!=null)
                     mOnGoodsNunChangeListener.onNumChange();
                 isSelected(goodsNum[position], holder,dataList.get(position).isMoreStandard());
@@ -254,7 +258,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                         holder.tvGoodsSelectNum.setVisibility(View.GONE);
                         holder.scaleBtn.setVisibility((View.GONE));
                     }
-                    changeShopCart();
+                    changeShopCart(position,-1);//----------------------------------------------------------
                     if(mOnGoodsNunChangeListener!=null)
                         mOnGoodsNunChangeListener.onNumChange();
                 }
@@ -263,27 +267,28 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
 
         // 选规格按钮事件处理
         holder.scaleBtn.setOnClickListener(new View.OnClickListener() {
-                                               @Override
-                                               public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-                                                   AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                                                   builder.setTitle("选规格");
-                                                   int i= dataList.get(position).getcIndex();
-                                                   if(i < 0) i =0;
-                                                   // 若有选择历史，则展示上一次选择的规格
-                                                   builder.setSingleChoiceItems(dataList.get(position).getSpecifications(), i, new DialogInterface.OnClickListener() {
-                                                       @Override
-                                                       public void onClick(DialogInterface dialogInterface, int i) {
-                                                           dataList.get(position).setcIndex(i);  //  保存选择的规格值，
-                                                           Toast.makeText(mContext,"你选择了"+dataList.get(position).getSpecifications()[i],Toast.LENGTH_SHORT).show();
-                                                           dialogInterface.dismiss();
-                                                       }
-                                                   });
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("选规格");
+                int i= dataList.get(position).getcIndex();
+                if(i < 0) i =0;
+                // 若有选择历史，则展示上一次选择的规格
+                builder.setSingleChoiceItems(dataList.get(position).getSpecifications(), i, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dataList.get(position).setcIndex(i);  //  保存选择的规格值，
+                        Toast.makeText(mContext,"你选择了"+dataList.get(position).getSpecifications()[i],Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                        changeShopCart(position,0);
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
 
-                                                   AlertDialog alert = builder.create();
-                                                   alert.show();
-                                               }
-                                           }
+
+            }}
 
         );
     }
@@ -337,8 +342,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     /**
      * 修改购物车状态
      */
-    private void changeShopCart() {
-        EventBus.getDefault().post(new MessageEvent(buyNum,totalPrice,selectGoods));
+    private void changeShopCart(int index,int type) {
+        EventBus.getDefault().post(new MessageEvent(buyNum,totalPrice,dataList,index,type,goodsNum));
         EventBus.getDefault().post(new GoodsListEvent(mGoodsCategoryBuyNums));
         if(shopCart==null)return;
         if (buyNum > 0) {

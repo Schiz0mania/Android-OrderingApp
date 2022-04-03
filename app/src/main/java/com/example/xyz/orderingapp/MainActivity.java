@@ -58,8 +58,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);//注册
 
+        setContentView(R.layout.activity_main);
         setCollsapsing();
         initView();
         setViewPager();
@@ -150,23 +151,32 @@ public class MainActivity extends BaseActivity {
      * 添加 或者  删除  商品发送的消息处理
      * @param event
      */
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe()
     public void onMessageEvent(MessageEvent event) {
+
         if(event!=null){
-            if(event.num>0){
-                shopCartNum.setText(String.valueOf(event.num));
+
+            if(event.eventtype == 1){
+                Log.v("MainActivity","商品"+event.goods.get(event.index).getName() + "增加1"+",此时总量为"+event.goodsNum[event.index]);
+            }else if(event.eventtype == -1){
+                Log.v("MainActivity","商品"+event.goods.get(event.index).getName() + "减少1"+",此时总量为"+event.goodsNum[event.index]);
+            }else{
+                Log.v("MainActivity","商品"+event.goods.get(event.index).getName() + "选取规格"+event.goods.get(event.index).getSpecifications()[event.goods.get(event.index).getcIndex()]);
+            }
+
+            if(event.totalnum>0){
+                shopCartNum.setText(String.valueOf(event.totalnum));
                 shopCartNum.setVisibility(View.VISIBLE);
                 totalPrice.setVisibility(View.VISIBLE);
                 noShop.setVisibility(View.GONE);
-
             }else{
                 shopCartNum.setVisibility(View.GONE);
                 totalPrice.setVisibility(View.GONE);
                 noShop.setVisibility(View.VISIBLE);
             }
-            totalPrice.setText("¥"+String.valueOf(event.price));
+            totalPrice.setText("¥"+String.valueOf(event.totalprice));
 
-            Log.v("NewTabActivity","添加的数量："+event.goods.size());
+
         }
 
     }
@@ -178,6 +188,7 @@ public class MainActivity extends BaseActivity {
      * @param startLocation
      */
     public void setAnim(final View v, int[] startLocation) {
+
         anim_mask_layout = null;
         anim_mask_layout = createAnimLayout();
         anim_mask_layout.addView(v);//把动画小球添加到动画层
@@ -266,7 +277,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+
     }
 
     @Override
