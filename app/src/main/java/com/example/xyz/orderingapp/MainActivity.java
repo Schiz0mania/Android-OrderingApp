@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
+import com.example.xyz.orderingapp.fragment.EvaluationFragment;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
 
@@ -81,8 +82,8 @@ public class MainActivity extends BaseActivity {
                 handler.postDelayed(task, 3000);
                 Log.v("test","current index is"+currentPos);
             } else {
-                // 如果处于拖拽状态停止自动播放，会每隔0.5秒检查一次是否可以正常自动播放。
-                handler.postDelayed(task, 500);
+                // 如果处于拖拽状态停止自动播放，会每隔2秒检查一次是否可以正常自动播放。
+                handler.postDelayed(task, 2000);
             }
         }
     };
@@ -152,18 +153,21 @@ public class MainActivity extends BaseActivity {
     private void setViewPager() {
 
         GoodsFragment goodsFragment=new GoodsFragment();
+        EvaluationFragment evaluationFragment = new EvaluationFragment();
+
 
         mFragments.add(goodsFragment);
-
+        mFragments.add(evaluationFragment);
 
         mTitles.add("商品");
+        mTitles.add("评价");
 
 
         adapter=new TabFragmentAdapter(getSupportFragmentManager(),mFragments,mTitles);
         viewPager.setAdapter(adapter);
         imgVp.setAdapter(imageAdapter);
         slidingTabLayout.setupWithViewPager(viewPager);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -189,6 +193,7 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
         imgVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int position;
             private int oldpos;
