@@ -45,21 +45,22 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvGoodsDescription"
+                android:id="@+id/tvGoodsIntegral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:maxLines="2"
-                android:text="来自长白山的深层岩水"
+                android:text="月销12份 好评率80%"
                 android:textColor="@color/color_999"
-                android:textSize="10sp"/>
+                android:textSize="8sp"/>
             <TextView
-                android:id="@+id/tvGoodsIntegral"
+
+                android:id="@+id/tvGoodsDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textColor="#444444"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:text="月销12份 好评率80%"
                 />
         </LinearLayout>

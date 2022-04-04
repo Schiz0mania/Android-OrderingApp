@@ -118,7 +118,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private  void initImage(){
-        int[] resIds=new int[]{R.drawable.img_one,R.drawable.img_two,R.drawable.img_three,R.drawable.img_four,R.drawable.img_five};
+        int[] resIds=new int[]{
+                R.drawable.ksj,
+                R.drawable.krbf,
+                R.drawable.zjklt,
+                R.drawable.xhlcjd,
+                R.drawable.nnnzb};
         ArrayList<ImageView> images=new ArrayList<>();
         initImages(images,resIds);
         imageAdapter=new ImageAdapter(this,images);
