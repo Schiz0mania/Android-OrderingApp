@@ -79,7 +79,6 @@
         ],
         "name": "蔬菜"
       }
-
     },
     {
     "goodscategory":
@@ -131,8 +130,51 @@
       ],
       "name": "饮料"
     }
-  
-		}
-	
+		},
+    {
+      "goodscategory":
+      {
+        "goodsitem": [
+          {
+            "name": "虎皮卷",
+            "price": 15,
+            "introduce": "芋泥夹心好7",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "蛋挞",
+            "price": 6,
+            "introduce": "正宗葡式蛋挞",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "榴莲千层",
+            "price": 20,
+            "introduce": "精选泰国金枕头榴莲，精心制作",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          },
+          {
+            "name": "酸奶补丁",
+            "price": 8,
+            "introduce": "本地奶源，当日现做，口味可选",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": true,
+            "specifications": [ "原味", "香蕉", "芒果","草莓" ]
+          },
+          {
+            "name": "蔓越莓麻薯",
+            "price": 4,
+            "introduce": "Q弹有韧性，微甜蔓越莓，你的选择",
+            "goodsImgUrl": "xxxxx",
+            "moreStandard": false
+          }
+        ],
+        "name": "甜点"
+      }
+    }
+
 	
 ]}
