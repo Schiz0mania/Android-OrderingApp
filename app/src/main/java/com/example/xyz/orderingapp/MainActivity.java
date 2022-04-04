@@ -62,31 +62,13 @@ public class MainActivity extends BaseActivity {
 
     private ViewPager imgVp;
     private ImageAdapter imageAdapter;
+    private int resSize;
     private int FIRST_ITEM_INDEX;
     private int LAST_ITEM_INDEX;
     private int currentPos;
     //private boolean isChanged;
     private boolean isAuto;
     private android.os.Handler handler;
-
-    private Runnable task = new Runnable() {
-        @Override
-        public void run() {
-
-            if (isAuto) {
-                // 位置循环
-                currentPos = currentPos+1 % 3;
-
-                // 正常每隔3秒播放一张图片
-                imgVp.setCurrentItem(currentPos,false);
-                handler.postDelayed(task, 3000);
-                Log.v("test","current index is"+currentPos);
-            } else {
-                // 如果处于拖拽状态停止自动播放，会每隔2秒检查一次是否可以正常自动播放。
-                handler.postDelayed(task, 2000);
-            }
-        }
-    };
 
 
     @Override
@@ -126,6 +108,7 @@ public class MainActivity extends BaseActivity {
                 R.drawable.nnnzb};
         ArrayList<ImageView> images=new ArrayList<>();
         initImages(images,resIds);
+        resSize=images.size();
         imageAdapter=new ImageAdapter(this,images);
         imgVp.setAdapter(imageAdapter);
         imgVp.setCurrentItem(1);
@@ -149,6 +132,24 @@ public class MainActivity extends BaseActivity {
                 .into(img);
         return img;
     }
+    private Runnable task = new Runnable() {
+        @Override
+        public void run() {
+
+            if (isAuto) {
+                // 位置循环
+                currentPos = currentPos+1 % resSize ;
+
+                // 正常每隔3秒播放一张图片
+                imgVp.setCurrentItem(currentPos,false);
+                handler.postDelayed(task, 3000);
+                Log.v("test","current index is"+currentPos);
+            } else {
+                // 如果处于拖拽状态停止自动播放，会每隔2秒检查一次是否可以正常自动播放。
+                handler.postDelayed(task, 2000);
+            }
+        }
+    };
 
 
 

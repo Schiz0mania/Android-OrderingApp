@@ -2,6 +2,7 @@ package com.example.xyz.orderingapp.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
@@ -190,7 +191,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        int id[] = {R.drawable.nnnzb,
+        final int id[] = {R.drawable.nnnzb,
                 R.drawable.ksj,
                 R.drawable.krbf,
                 R.drawable.zjklt,
@@ -227,6 +228,25 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                 .placeholder(R.mipmap.icon_logo_image_default)
                 .crossFade()
                 .into(holder.ivGoodsImage);
+
+        holder.ivGoodsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(mActivity);
+                ImageView image=new ImageView(mContext);
+                image.setImageResource(id[position]);
+                dialog.setContentView(image);
+                dialog.getWindow().setBackgroundDrawableResource(R.color.white);
+                dialog.show();
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+
+                    }
+                });
+            }
+        });
 
 
 
