@@ -19,7 +19,7 @@
     ![image](https://github.com/Schiz0mania/work/blob/master/%E5%8A%A8%E7%94%BB.gif)
   - 后续工作
     - 评论区优化
-    - 增加点击图片显示大图功能（仅限于商品item）
+    - 增加点击图片显示大图功能（仅限于商品item） 已完成（4/4）
     - 图片轮播修复与优化
 
 
