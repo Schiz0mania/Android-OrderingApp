@@ -15,7 +15,12 @@
 - 进度
   2，3，4，7基础部分已完成，后续优化中 
   - 基础版本演示（4/4/2022）
-  ![image](https://github.com/Schiz0mania/work/blob/master/%E5%8A%A8%E7%94%BB.gif)
+    
+    ![image](https://github.com/Schiz0mania/work/blob/master/%E5%8A%A8%E7%94%BB.gif)
+  - 后续工作
+    - 评论区优化
+    - 增加点击图片显示大图功能（仅限于商品item）
+    - 图片轮播修复与优化
 
 
 
