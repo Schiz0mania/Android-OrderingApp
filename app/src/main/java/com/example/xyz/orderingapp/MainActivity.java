@@ -7,7 +7,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,13 +27,12 @@ import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
-import com.example.xyz.orderingapp.fragment.EvaluationFragment;
+import com.example.xyz.orderingapp.fragment.CommentFragment;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,11 +157,11 @@ public class MainActivity extends BaseActivity {
     private void setViewPager() {
 
         GoodsFragment goodsFragment=new GoodsFragment();
-        EvaluationFragment evaluationFragment = new EvaluationFragment();
+        CommentFragment commentFragment = new CommentFragment();
 
 
         mFragments.add(goodsFragment);
-        mFragments.add(evaluationFragment);
+        mFragments.add(commentFragment);
 
         mTitles.add("商品");
         mTitles.add("评价");
