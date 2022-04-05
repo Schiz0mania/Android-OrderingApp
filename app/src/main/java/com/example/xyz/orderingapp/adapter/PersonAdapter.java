@@ -229,6 +229,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                 .crossFade()
                 .into(holder.ivGoodsImage);
 
+        // 图片点击放大展示功能
         holder.ivGoodsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,7 +237,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                 ImageView image=new ImageView(mContext);
                 image.setImageResource(id[position]);
                 dialog.setContentView(image);
-                dialog.getWindow().setBackgroundDrawableResource(R.color.white);
+                dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
                 dialog.show();
                 image.setOnClickListener(new View.OnClickListener() {
                     @Override

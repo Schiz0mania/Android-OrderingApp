@@ -1,5 +1,7 @@
 package com.example.xyz.orderingapp.entity;
 
+
+
 import java.util.List;
 
 /**
@@ -7,14 +9,14 @@ import java.util.List;
  */
 
 public class Evaluation {
-    private List<Comment> evaluations;
+    private List<Comment> data;
 
-    public void setEvaluations(List<Comment> evaluations) {
-        this.evaluations = evaluations;
+    public List<Comment> getData() {
+        return data;
     }
 
-    public List<Comment> getEvaluations() {
-        return evaluations;
+    public void setData(List<Comment> data) {
+        this.data = data;
     }
 
     public static class Comment{
@@ -38,6 +40,9 @@ public class Evaluation {
         }
 
 
+
     }
+
+
 
 }
