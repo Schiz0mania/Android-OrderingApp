@@ -1,14 +1,19 @@
 package com.example.xyz.orderingapp;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -18,10 +23,12 @@ import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
@@ -43,6 +50,8 @@ public class MainActivity extends BaseActivity {
     private TabLayout slidingTabLayout;
     //fragment列表
     private List<Fragment> mFragments=new ArrayList<>();
+    private GoodsFragment  goodsFragment;
+    private CommentFragment  commentFragment ;
     //tab名的列表
     private List<String> mTitles=new ArrayList<>();
 
@@ -56,6 +65,7 @@ public class MainActivity extends BaseActivity {
 
 
     private Button checkoutBtn;
+    private FloatingActionButton addComment;
 
 
     private ViewPager imgVp;
@@ -91,8 +101,17 @@ public class MainActivity extends BaseActivity {
         totalPrice=(TextView)findViewById(R.id.totalPrice);
         noShop=(TextView)findViewById(R.id.noShop);
         imgVp=findViewById(R.id.scrollView);
+        addComment = findViewById(R.id.fabAdd);
         handler = new android.os.Handler();
         task.run();
+
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(MainActivity.this);
+
+            }
+        });
 
 
     }
@@ -156,8 +175,8 @@ public class MainActivity extends BaseActivity {
 
     private void setViewPager() {
 
-        GoodsFragment goodsFragment=new GoodsFragment();
-        CommentFragment commentFragment = new CommentFragment();
+        goodsFragment=new GoodsFragment();
+       commentFragment = new CommentFragment();
 
 
         mFragments.add(goodsFragment);
@@ -181,10 +200,19 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:
+                        addComment.setVisibility(View.GONE);
                         shopCartMain.startAnimation(
                                 AnimationUtil.createInAnimation(MainActivity.this, shopCartMain.getMeasuredHeight()));
+
+                        addComment.startAnimation(
+                                AnimationUtil.createOutAnimation(MainActivity.this,addComment.getMeasuredHeight()*2)
+                        );
                         break;
                     case 1:
+                        addComment.startAnimation(
+                                AnimationUtil.createInAnimation(MainActivity.this,addComment.getMeasuredHeight()*2)
+                        );
+                        addComment.setVisibility(View.VISIBLE);
                         shopCartMain.startAnimation(
                                 AnimationUtil.createOutAnimation(MainActivity.this, shopCartMain.getMeasuredHeight()));
                         break;
@@ -197,6 +225,8 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+
 
         imgVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int position;
@@ -237,6 +267,31 @@ public class MainActivity extends BaseActivity {
 
 
 
+    }
+
+    public  void showDialog(final Context context){
+        LayoutInflater factory = LayoutInflater.from(context);
+        final View textEntryView = factory.inflate(R.layout.comment_commit, null);
+        final EditText editTextName = (EditText) textEntryView.findViewById(R.id.editTextName);
+        final EditText editTextComment = (EditText)textEntryView.findViewById(R.id.editTextComment);
+        AlertDialog.Builder ad1 = new AlertDialog.Builder(context);
+        ad1.setTitle("增加评价");
+        ad1.setView(textEntryView);
+        ad1.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+
+                Toast.makeText(context,"woshishabi",Toast.LENGTH_SHORT);
+
+
+
+            }
+        });
+        ad1.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+
+            }
+        });
+        ad1.show();// 显示对话框
     }
 
 

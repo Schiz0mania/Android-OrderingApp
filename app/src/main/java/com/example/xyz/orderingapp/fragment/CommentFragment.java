@@ -35,7 +35,7 @@ import java.util.List;
 public class CommentFragment extends BaseFragment {
     private String keywords;
     private StickyHeadersItemDecoration top;
-    private FloatingActionButton addComment ;
+
     private RecyclerView commentListView;
     private CommentAdapter commentAdapter;
     private Evaluation commentList;
@@ -72,7 +72,7 @@ public class CommentFragment extends BaseFragment {
     public void initView(View view){
 
         commentListView=view.findViewById(R.id.commentRecycleView);
-        addComment=view.findViewById(R.id.fabAdd);
+
     }
     public void initData(){
         // 初始化数据
@@ -87,39 +87,11 @@ public class CommentFragment extends BaseFragment {
         mLinearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         commentListView.setLayoutManager(mLinearLayoutManager);
         commentListView.setAdapter(commentAdapter);
-        // 添加点击事件
-        addComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(getContext());
-            }
-        });
+
 
     }
 
-public  void showDialog(final Context context){
-    LayoutInflater factory = LayoutInflater.from(context);
-    final View textEntryView = factory.inflate(R.layout.comment_commit, null);
-    final EditText editTextName = (EditText) textEntryView.findViewById(R.id.editTextName);
-    final EditText editTextComment = (EditText)textEntryView.findViewById(R.id.editTextComment);
-    AlertDialog.Builder ad1 = new AlertDialog.Builder(context);
-    ad1.setTitle("增加评价");
-    ad1.setIcon(android.R.drawable.ic_dialog_info);
-    ad1.setView(textEntryView);
-    ad1.setPositiveButton("是", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int i) {
 
-            Toast.makeText(context,"woshishabi",Toast.LENGTH_SHORT);
-
-        }
-    });
-    ad1.setNegativeButton("否", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int i) {
-
-        }
-    });
-    ad1.show();// 显示对话框
-}
 
 
 
