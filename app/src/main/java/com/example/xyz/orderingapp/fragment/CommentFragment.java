@@ -18,7 +18,9 @@ import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.example.xyz.orderingapp.R;
 import com.example.xyz.orderingapp.adapter.CommentAdapter;
 import com.example.xyz.orderingapp.entity.Evaluation;
+import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.GoodsListEvent;
+import com.example.xyz.orderingapp.utils.DataUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -36,7 +38,7 @@ public class CommentFragment extends BaseFragment {
     private FloatingActionButton addComment ;
     private RecyclerView commentListView;
     private CommentAdapter commentAdapter;
-    private List<Evaluation> commentList;
+    private Evaluation commentList;
     private LinearLayoutManager mLinearLayoutManager;
 
 
@@ -74,20 +76,24 @@ public class CommentFragment extends BaseFragment {
     }
     public void initData(){
         // 初始化数据
-        commentList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        Evaluation tmp = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext(),"comment.json"), Evaluation.class);
 
-            Evaluation bean = new Evaluation();
+        commentList = new Evaluation();
+        commentList=tmp;
 
-            bean.setName("unknowuser" + i);
-            bean.setComments("好吃欸！！！！");
-            commentList.add(bean);
-        }
+
         // 设置adapter
-        commentAdapter = new CommentAdapter(getContext(),commentList);
+        commentAdapter = new CommentAdapter(getContext(),commentList.getData());
         mLinearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         commentListView.setLayoutManager(mLinearLayoutManager);
         commentListView.setAdapter(commentAdapter);
+        // 添加点击事件
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(getContext());
+            }
+        });
 
     }
 

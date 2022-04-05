@@ -72,7 +72,8 @@
         ],
         "name": "蔬菜"
       }
-    },{
+    },
+    {
       "goodscategory":
       {
         "goodsitem": [
@@ -108,7 +109,6 @@
         "name": "风味单品"
       }
     },
-
     {
     "goodscategory":
     {

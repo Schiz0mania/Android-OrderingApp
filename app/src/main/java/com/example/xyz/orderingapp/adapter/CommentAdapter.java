@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
-    private List<Evaluation> commentData;
+    private List<Evaluation.Comment> commentData;
     private Context context;
     @Override
         public CommentAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -27,14 +27,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 viewGroup, false);
         return new CommentAdapter.ViewHolder(view);
     }
-    public CommentAdapter(Context context,List<Evaluation> data){
+    public CommentAdapter(Context context,List<Evaluation.Comment> data){
         this.context=context;
         this.commentData=data;
     }
 
     @Override public void onBindViewHolder(CommentAdapter.ViewHolder holder, int position) {
 
-        Evaluation bean = commentData.get(position);
+        Evaluation.Comment bean = commentData.get(position);
         holder.evaName.setText(bean.getName());
         holder.evaComment.setText(bean.getComments());
 
