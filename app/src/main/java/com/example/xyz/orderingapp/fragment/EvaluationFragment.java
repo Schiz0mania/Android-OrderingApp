@@ -1,6 +1,7 @@
 package com.example.xyz.orderingapp.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -78,16 +79,16 @@ public class EvaluationFragment extends BaseFragment {
 
     private void init(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new MyAapter());
+        recyclerView.setAdapter(new MyAdapter());
     }
 
 
 
 
-    private class MyAapter extends RecyclerView.Adapter<MyAapter.ViewHolder> {
+    private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item,
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comment,
                     viewGroup, false);
             return new ViewHolder(view);
         }
@@ -112,6 +113,7 @@ public class EvaluationFragment extends BaseFragment {
 
             private final TextView evaName;
             private final TextView evaComment;
+            private final FloatingActionButton addComment;
 
 
 
@@ -119,6 +121,7 @@ public class EvaluationFragment extends BaseFragment {
                 super(itemView);
                 evaName = (TextView) itemView.findViewById(R.id.eva_name);
                 evaComment=itemView.findViewById(R.id.eva_comment);
+                addComment = itemView.findViewById(R.id.addComment);
                 itemView.setOnClickListener(this);
             }
 
