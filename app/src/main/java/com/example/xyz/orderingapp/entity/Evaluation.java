@@ -18,10 +18,26 @@ public class Evaluation {
     public void setData(List<Comment> data) {
         this.data = data;
     }
+    public void addDate(Comment e){
+        this.data.add(e);
+
+    }
+    public void changeData(Comment newComment){
+        this.data.add(newComment);
+
+    }
 
     public static class Comment{
         private String name ;
         private String comments;
+        public Comment(){
+
+        }
+        public Comment(String cName,String cComment){
+            this.name=cName;
+            this.comments=cComment;
+
+        }
         public void setComments(String comments) {
             this.comments = comments;
         }

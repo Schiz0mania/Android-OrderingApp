@@ -33,6 +33,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
+import com.example.xyz.orderingapp.entity.Evaluation;
+import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.MessageEvent;
 import com.example.xyz.orderingapp.fragment.CommentFragment;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
@@ -201,6 +203,7 @@ public class MainActivity extends BaseActivity {
                 switch (position){
                     case 0:
                         addComment.setVisibility(View.GONE);
+                        addComment.setClickable(false);
                         shopCartMain.startAnimation(
                                 AnimationUtil.createInAnimation(MainActivity.this, shopCartMain.getMeasuredHeight()));
 
@@ -213,6 +216,7 @@ public class MainActivity extends BaseActivity {
                                 AnimationUtil.createInAnimation(MainActivity.this,addComment.getMeasuredHeight()*2)
                         );
                         addComment.setVisibility(View.VISIBLE);
+                        addComment.setClickable(true);
                         shopCartMain.startAnimation(
                                 AnimationUtil.createOutAnimation(MainActivity.this, shopCartMain.getMeasuredHeight()));
                         break;
@@ -279,11 +283,10 @@ public class MainActivity extends BaseActivity {
         ad1.setView(textEntryView);
         ad1.setPositiveButton("是", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int i) {
-
-                Toast.makeText(context,"woshishabi",Toast.LENGTH_SHORT);
-
-
-
+                String cName=editTextName.getText().toString();
+                String cComment=editTextComment.getText().toString();
+                EventBus.getDefault().post(new CommentEvent(new Evaluation.Comment(cName,cComment)));
+                Log.v("addComment",cName+"评价"+cComment);
             }
         });
         ad1.setNegativeButton("否", new DialogInterface.OnClickListener() {

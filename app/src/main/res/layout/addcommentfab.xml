@@ -8,7 +8,7 @@
     app:srcCompat="@mipmap/add"
     android:background="@color/transparent"
     android:clickable="true"
-    android:focusable="true"
+
 
 
     xmlns:android="http://schemas.android.com/apk/res/android"
