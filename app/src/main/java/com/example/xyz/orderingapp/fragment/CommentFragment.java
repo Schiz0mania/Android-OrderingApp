@@ -19,9 +19,11 @@ import com.example.xyz.orderingapp.R;
 import com.example.xyz.orderingapp.adapter.CommentAdapter;
 import com.example.xyz.orderingapp.entity.Evaluation;
 import com.example.xyz.orderingapp.entity.GoodsListBean;
+import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.GoodsListEvent;
 import com.example.xyz.orderingapp.utils.DataUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -63,6 +65,8 @@ public class CommentFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comment, null);
+
+
         initView(view);
         initData();
 
@@ -91,7 +95,14 @@ public class CommentFragment extends BaseFragment {
 
     }
 
+    @Subscribe
+    public void addCommentEvent(CommentEvent e){
 
+        commentList.changeData(e.getNewComment());
+        commentAdapter.notifyDataSetChanged();
+
+
+    }
 
 
 

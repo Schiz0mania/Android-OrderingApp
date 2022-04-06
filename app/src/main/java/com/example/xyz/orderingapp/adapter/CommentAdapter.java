@@ -10,7 +10,11 @@ import android.widget.Toast;
 
 import com.example.xyz.orderingapp.R;
 import com.example.xyz.orderingapp.entity.Evaluation;
+import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.fragment.CommentFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         public CommentAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comment,
                 viewGroup, false);
+
         return new CommentAdapter.ViewHolder(view);
     }
     public CommentAdapter(Context context,List<Evaluation.Comment> data){
@@ -46,6 +51,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         return commentData.size();
     }
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
 
