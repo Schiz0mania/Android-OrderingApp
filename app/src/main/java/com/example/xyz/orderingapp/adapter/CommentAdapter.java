@@ -12,6 +12,7 @@ import com.example.xyz.orderingapp.R;
 import com.example.xyz.orderingapp.entity.Evaluation;
 import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.fragment.CommentFragment;
+import com.example.xyz.orderingapp.myinterface.ItemTouchHelperAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by xhh on 2022/4/5.
  */
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> implements ItemTouchHelperAdapter{
     private List<Evaluation.Comment> commentData;
     private Context context;
     @Override
@@ -51,6 +52,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         return commentData.size();
     }
+
+
+
+    @Override
+    public void onItemDissmiss(int position) {
+        //移除数据
+        commentData.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
+
+
 
 
 
