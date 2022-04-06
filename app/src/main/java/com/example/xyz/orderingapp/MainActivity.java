@@ -55,7 +55,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// test for git actions
 public class MainActivity extends BaseActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout; // 滑动展示
     private AppBarLayout appBarLayout;
