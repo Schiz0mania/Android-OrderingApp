@@ -28,10 +28,16 @@ import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
+import com.example.xyz.orderingapp.fragment.BillFragment;
 import com.example.xyz.orderingapp.fragment.EvaluationFragment;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
-
+import android.app.Activity;
+import android.content.Intent;
+import android.view.View;//注意view的大小写
+import android.view.View.OnClickListener;
+import android.os.Bundle;
+import android.widget.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -56,7 +62,6 @@ public class MainActivity extends BaseActivity {
     private RelativeLayout shopCartMain;
     private ViewGroup anim_mask_layout;//动画层
 
-
     private Button checkoutBtn;
 
 
@@ -68,6 +73,7 @@ public class MainActivity extends BaseActivity {
     //private boolean isChanged;
     private boolean isAuto;
     private android.os.Handler handler;
+    private MessageEvent event;
 
     private Runnable task = new Runnable() {
         @Override
@@ -98,7 +104,7 @@ public class MainActivity extends BaseActivity {
         initView();
         initImage();
         setViewPager();
-
+        checkoutBtn.setOnClickListener(new MyButtonListener());
     }
 
     private void initView() {
@@ -116,6 +122,17 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
+    class MyButtonListener implements OnClickListener{
+        public void onClick(View v) {
+            EventBus.getDefault().post(event);
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, BillActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
+    }
+
+
 
     private  void initImage(){
         int[] resIds=new int[]{
@@ -166,7 +183,6 @@ public class MainActivity extends BaseActivity {
 
         mTitles.add("商品");
         mTitles.add("评价");
-
 
         adapter=new TabFragmentAdapter(getSupportFragmentManager(),mFragments,mTitles);
         viewPager.setAdapter(adapter);
@@ -269,8 +285,8 @@ public class MainActivity extends BaseActivity {
     @Subscribe()
     public void onMessageEvent(MessageEvent event) {
 
-        if(event!=null){
 
+        if(event!=null){
             if(event.eventtype == 1){
                 Log.v("MainActivity","商品"+event.goods.get(event.index).getName() + "增加1"+",此时总量为"+event.goodsNum[event.index]);
             }else if(event.eventtype == -1){
@@ -290,6 +306,7 @@ public class MainActivity extends BaseActivity {
                 noShop.setVisibility(View.VISIBLE);
             }
             totalPrice.setText("¥"+String.valueOf(event.totalprice));
+            this.event=event;
 
 
         }

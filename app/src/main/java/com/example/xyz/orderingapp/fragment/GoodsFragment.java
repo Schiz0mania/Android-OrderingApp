@@ -27,8 +27,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
 /**
  * Created by xhh on 2022/4/2.
  */
@@ -139,7 +137,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
 
     private void initView(View view) {
         mGoodsCateGoryList = (RecyclerView)view.findViewById(R.id.goods_category_list);
-        recyclerView = (RecyclerView) view.findViewById(R.id.goods_recycleView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.bill_recycleView);
     }
 
 
