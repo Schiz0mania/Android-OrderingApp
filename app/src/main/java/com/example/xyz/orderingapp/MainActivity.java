@@ -64,8 +64,6 @@ public class MainActivity extends BaseActivity {
     private TextView noShop;
     private RelativeLayout shopCartMain;
     private ViewGroup anim_mask_layout;//动画层
-
-
     private Button checkoutBtn;
     private FloatingActionButton addComment;
 
@@ -79,6 +77,8 @@ public class MainActivity extends BaseActivity {
     //private boolean isChanged;
     private boolean isAuto;
     private android.os.Handler handler;
+
+    private Evaluation addedCommentData;
 
 
     @Override
@@ -352,6 +352,10 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+    @Subscribe
+    public void addCommentEvent(CommentEvent e){
+        addedCommentData.changeData(e.getNewComment());
+    }
 
 
     /**
@@ -454,6 +458,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onStop() {
+
+
         super.onStop();
         EventBus.getDefault().unregister(this);
 

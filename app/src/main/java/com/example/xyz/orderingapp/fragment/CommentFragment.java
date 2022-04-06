@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.example.xyz.orderingapp.entity.Evaluation;
 import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.GoodsListEvent;
+import com.example.xyz.orderingapp.myinterface.ItemTouchHelperAdapter;
+import com.example.xyz.orderingapp.myinterface.SimpleItemTouchHelperCallback;
 import com.example.xyz.orderingapp.utils.DataUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -70,12 +73,15 @@ public class CommentFragment extends BaseFragment {
         initView(view);
         initData();
 
+
+
         return view;
     }
 
     public void initView(View view){
 
         commentListView=view.findViewById(R.id.commentRecycleView);
+
 
     }
     public void initData(){
@@ -84,6 +90,9 @@ public class CommentFragment extends BaseFragment {
 
         commentList = new Evaluation();
         commentList=tmp;
+        for(Evaluation.Comment i : commentList.getData()){
+            i.setNewPosted(false);
+        }
 
 
         // 设置adapter
@@ -91,6 +100,11 @@ public class CommentFragment extends BaseFragment {
         mLinearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         commentListView.setLayoutManager(mLinearLayoutManager);
         commentListView.setAdapter(commentAdapter);
+
+        // 设置滑动删除助手
+        SimpleItemTouchHelperCallback callback = new SimpleItemTouchHelperCallback(commentAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(commentListView);
 
 
     }
