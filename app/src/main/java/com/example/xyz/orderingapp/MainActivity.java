@@ -283,17 +283,10 @@ public class MainActivity extends BaseActivity {
         ad1.setView(textEntryView);
         ad1.setPositiveButton("是", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int i) {
-                String cName=editTextName.toString();
-                String cComment=editTextComment.toString();
-
-                Toast.makeText(context,"woshishabi",Toast.LENGTH_SHORT);
-
+                String cName=editTextName.getText().toString();
+                String cComment=editTextComment.getText().toString();
                 EventBus.getDefault().post(new CommentEvent(new Evaluation.Comment(cName,cComment)));
-
-                adapter.notifyDataSetChanged();
-
-
-
+                Log.v("addComment",cName+"评价"+cComment);
             }
         });
         ad1.setNegativeButton("否", new DialogInterface.OnClickListener() {
