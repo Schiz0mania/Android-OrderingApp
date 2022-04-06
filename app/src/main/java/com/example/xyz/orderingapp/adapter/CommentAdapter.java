@@ -58,8 +58,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onItemDissmiss(int position) {
         //移除数据
-        commentData.remove(position);
-        notifyItemRemoved(position);
+        if(commentData.get(position).isNewPosted()) {
+            commentData.remove(position);
+            notifyItemRemoved(position);
+        }
+        notifyDataSetChanged();
+
+
     }
 
 

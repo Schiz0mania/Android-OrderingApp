@@ -30,14 +30,25 @@ public class Evaluation {
     public static class Comment{
         private String name ;
         private String comments;
+        private boolean isNewPosted;
         public Comment(){
 
         }
         public Comment(String cName,String cComment){
             this.name=cName;
             this.comments=cComment;
+            this.isNewPosted=true;
 
         }
+
+        public boolean isNewPosted() {
+            return isNewPosted;
+        }
+
+        public void setNewPosted(boolean newPosted) {
+            isNewPosted = newPosted;
+        }
+
         public void setComments(String comments) {
             this.comments = comments;
         }

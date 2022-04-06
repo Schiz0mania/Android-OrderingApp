@@ -90,6 +90,9 @@ public class CommentFragment extends BaseFragment {
 
         commentList = new Evaluation();
         commentList=tmp;
+        for(Evaluation.Comment i : commentList.getData()){
+            i.setNewPosted(false);
+        }
 
 
         // 设置adapter
