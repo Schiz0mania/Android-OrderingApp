@@ -78,9 +78,7 @@ public class GoodsListBean implements Serializable {
                 private boolean moreStandard;
                 private String[] specifications;
                 private int cIndex;  // 对应上面选择的规格值
-                GoodsitemEntity(){
-                    cIndex=-1;
-                }
+
                 public int getId() {
                     return id;
                 }

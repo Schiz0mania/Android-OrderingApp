@@ -60,4 +60,7 @@
     <include
         layout="@layout/shop_cart"
         ></include>
+    <include
+        layout="@layout/addcommentfab"
+        android:visibility="gone"/>
 </android.support.design.widget.CoordinatorLayout>

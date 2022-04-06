@@ -65,7 +65,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
 
     private void initData() {
 
-        GoodsListBean dataList = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext()), GoodsListBean.class);
+        GoodsListBean dataList = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext(),"goods.json"), GoodsListBean.class);
 
         int i = 0;
         int j = 0;

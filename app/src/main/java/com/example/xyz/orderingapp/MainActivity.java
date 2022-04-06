@@ -1,15 +1,19 @@
 package com.example.xyz.orderingapp;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -19,17 +23,25 @@ import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
+import com.example.xyz.orderingapp.entity.Evaluation;
+import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.MessageEvent;
+
 import com.example.xyz.orderingapp.fragment.BillFragment;
-import com.example.xyz.orderingapp.fragment.EvaluationFragment;
+import com.example.xyz.orderingapp.fragment.CommentFragment;
+
+import com.example.xyz.orderingapp.fragment.CommentFragment;
+
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
 import android.app.Activity;
@@ -40,7 +52,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +62,8 @@ public class MainActivity extends BaseActivity {
     private TabLayout slidingTabLayout;
     //fragment列表
     private List<Fragment> mFragments=new ArrayList<>();
+    private GoodsFragment  goodsFragment;
+    private CommentFragment  commentFragment ;
     //tab名的列表
     private List<String> mTitles=new ArrayList<>();
 
@@ -63,10 +76,12 @@ public class MainActivity extends BaseActivity {
     private ViewGroup anim_mask_layout;//动画层
 
     private Button checkoutBtn;
+    private FloatingActionButton addComment;
 
 
     private ViewPager imgVp;
     private ImageAdapter imageAdapter;
+    private int resSize;
     private int FIRST_ITEM_INDEX;
     private int LAST_ITEM_INDEX;
     private int currentPos;
@@ -75,24 +90,7 @@ public class MainActivity extends BaseActivity {
     private android.os.Handler handler;
     private MessageEvent event;
 
-    private Runnable task = new Runnable() {
-        @Override
-        public void run() {
-
-            if (isAuto) {
-                // 位置循环
-                currentPos = currentPos+1 % 3;
-
-                // 正常每隔3秒播放一张图片
-                imgVp.setCurrentItem(currentPos,false);
-                handler.postDelayed(task, 3000);
-                Log.v("test","current index is"+currentPos);
-            } else {
-                // 如果处于拖拽状态停止自动播放，会每隔2秒检查一次是否可以正常自动播放。
-                handler.postDelayed(task, 2000);
-            }
-        }
-    };
+    private Evaluation addedCommentData;
 
 
     @Override
@@ -117,8 +115,17 @@ public class MainActivity extends BaseActivity {
         totalPrice=(TextView)findViewById(R.id.totalPrice);
         noShop=(TextView)findViewById(R.id.noShop);
         imgVp=findViewById(R.id.scrollView);
+        addComment = findViewById(R.id.fabAdd);
         handler = new android.os.Handler();
         task.run();
+
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(MainActivity.this);
+
+            }
+        });
 
 
     }
@@ -143,6 +150,7 @@ public class MainActivity extends BaseActivity {
                 R.drawable.nnnzb};
         ArrayList<ImageView> images=new ArrayList<>();
         initImages(images,resIds);
+        resSize=images.size();
         imageAdapter=new ImageAdapter(this,images);
         imgVp.setAdapter(imageAdapter);
         imgVp.setCurrentItem(1);
@@ -166,6 +174,24 @@ public class MainActivity extends BaseActivity {
                 .into(img);
         return img;
     }
+    private Runnable task = new Runnable() {
+        @Override
+        public void run() {
+
+            if (isAuto) {
+                // 位置循环
+                currentPos = currentPos+1 % resSize ;
+
+                // 正常每隔3秒播放一张图片
+                imgVp.setCurrentItem(currentPos,false);
+                handler.postDelayed(task, 3000);
+                Log.v("test","current index is"+currentPos);
+            } else {
+                // 如果处于拖拽状态停止自动播放，会每隔2秒检查一次是否可以正常自动播放。
+                handler.postDelayed(task, 2000);
+            }
+        }
+    };
 
 
 
@@ -174,12 +200,12 @@ public class MainActivity extends BaseActivity {
 
     private void setViewPager() {
 
-        GoodsFragment goodsFragment=new GoodsFragment();
-        EvaluationFragment evaluationFragment = new EvaluationFragment();
+        goodsFragment=new GoodsFragment();
+       commentFragment = new CommentFragment();
 
 
         mFragments.add(goodsFragment);
-        mFragments.add(evaluationFragment);
+        mFragments.add(commentFragment);
 
         mTitles.add("商品");
         mTitles.add("评价");
@@ -198,10 +224,21 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:
+                        addComment.setVisibility(View.GONE);
+                        addComment.setClickable(false);
                         shopCartMain.startAnimation(
                                 AnimationUtil.createInAnimation(MainActivity.this, shopCartMain.getMeasuredHeight()));
+
+                        addComment.startAnimation(
+                                AnimationUtil.createOutAnimation(MainActivity.this,addComment.getMeasuredHeight()*2)
+                        );
                         break;
                     case 1:
+                        addComment.startAnimation(
+                                AnimationUtil.createInAnimation(MainActivity.this,addComment.getMeasuredHeight()*2)
+                        );
+                        addComment.setVisibility(View.VISIBLE);
+                        addComment.setClickable(true);
                         shopCartMain.startAnimation(
                                 AnimationUtil.createOutAnimation(MainActivity.this, shopCartMain.getMeasuredHeight()));
                         break;
@@ -214,6 +251,8 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+
 
         imgVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int position;
@@ -254,6 +293,30 @@ public class MainActivity extends BaseActivity {
 
 
 
+    }
+
+    public  void showDialog(final Context context){
+        LayoutInflater factory = LayoutInflater.from(context);
+        final View textEntryView = factory.inflate(R.layout.comment_commit, null);
+        final EditText editTextName = (EditText) textEntryView.findViewById(R.id.editTextName);
+        final EditText editTextComment = (EditText)textEntryView.findViewById(R.id.editTextComment);
+        AlertDialog.Builder ad1 = new AlertDialog.Builder(context);
+        ad1.setTitle("增加评价");
+        ad1.setView(textEntryView);
+        ad1.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+                String cName=editTextName.getText().toString();
+                String cComment=editTextComment.getText().toString();
+                EventBus.getDefault().post(new CommentEvent(new Evaluation.Comment(cName,cComment)));
+                Log.v("addComment",cName+"评价"+cComment);
+            }
+        });
+        ad1.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+
+            }
+        });
+        ad1.show();// 显示对话框
     }
 
 
@@ -311,6 +374,10 @@ public class MainActivity extends BaseActivity {
 
         }
 
+    }
+    @Subscribe
+    public void addCommentEvent(CommentEvent e){
+        addedCommentData.changeData(e.getNewComment());
     }
 
 
@@ -414,6 +481,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onStop() {
+
+
         super.onStop();
         EventBus.getDefault().unregister(this);
 

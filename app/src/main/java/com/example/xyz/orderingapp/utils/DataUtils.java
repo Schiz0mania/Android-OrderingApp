@@ -38,10 +38,10 @@ public class DataUtils {
         return t;
     }
 
-    public static String getJsontoString(Context context) {
+    public static String getJsontoString(Context context,String filename) {
         InputStream input = null;
         try {
-            input = context.getAssets().open("test.json");
+            input = context.getAssets().open(filename);
             String json = convertStreamToString(input);
             return json;
         } catch (Exception e) {

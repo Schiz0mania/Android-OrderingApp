@@ -33,7 +33,7 @@ import com.example.xyz.orderingapp.adapter.BillAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
 import com.example.xyz.orderingapp.fragment.BillFragment;
-import com.example.xyz.orderingapp.fragment.EvaluationFragment;
+import com.example.xyz.orderingapp.fragment.CommentFragment;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
 
@@ -70,7 +70,7 @@ import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
-import com.example.xyz.orderingapp.fragment.EvaluationFragment;
+
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
 
@@ -109,7 +109,7 @@ import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.ImageAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.event.MessageEvent;
-import com.example.xyz.orderingapp.fragment.EvaluationFragment;
+
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
 
