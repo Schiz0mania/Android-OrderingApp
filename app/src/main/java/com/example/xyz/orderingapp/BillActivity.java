@@ -12,6 +12,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -31,8 +32,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.xyz.orderingapp.adapter.BillAdapter;
 import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
+import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.MessageEvent;
-import com.example.xyz.orderingapp.fragment.BillFragment;
+
 import com.example.xyz.orderingapp.fragment.CommentFragment;
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
@@ -42,6 +44,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
@@ -123,27 +126,29 @@ import java.util.List;
 
 public class BillActivity extends BaseActivity {
 
-    private ViewPager viewPager;
+    private BillAdapter billAdapter;
+    //商品
+    private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> commoditylist = new ArrayList<>();
     private TextView shopCartNum;
     private TextView totalPrice;
     private TextView noShop;
-    private RelativeLayout shopCartMain;
     private Button checkoutBtn;
-    private TabFragmentAdapter adapter;
-    private List<Fragment> mFragments=new ArrayList<>();
-    //tab名的列表
-    private List<String> mTitles=new ArrayList<>();
     private int discount;
     private boolean clicktime=true;
+    private RecyclerView recyclerView;
+    private MessageEvent event;
+    private LinearLayoutManager mLinearLayoutManager;
+    private List<Integer> getGoosNum=new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);//注册
-        setContentView(R.layout.bill_main);
+        setContentView(R.layout.billmain);
         initView();
-        setViewPager();
+        EventBus.getDefault().register(this);//注册
+       //initData();
         dicount();
+
     }
 
     private void initView() {
@@ -152,22 +157,21 @@ public class BillActivity extends BaseActivity {
         totalPrice = (TextView) findViewById(R.id.totalPrice1);
         noShop = (TextView) findViewById(R.id.noShop1);
         checkoutBtn = (Button) findViewById(R.id.CheckOut1);
-        viewPager = (ViewPager) findViewById(R.id.vp1);
+        recyclerView = (RecyclerView) findViewById(R.id.bill_recycleView1);
     }
 
-    private void setViewPager() {
+    private void initData() {
 
-        BillFragment billFragment = new BillFragment();
-       mFragments.add(billFragment);
-        mTitles.add("账单");
-        adapter=new TabFragmentAdapter(getSupportFragmentManager(),mFragments,mTitles);
-        viewPager.setAdapter(adapter);
+        mLinearLayoutManager =new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        billAdapter = new BillAdapter(this,commoditylist,getGoosNum);
+        billAdapter.setmActivity(this);
+        recyclerView.setAdapter(billAdapter);
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void MessageEvent(MessageEvent event) {
 
-        Log.v("BillActivity","商品此时总价为"+event.totalprice);
+        Log.v("BillActivity","商品总价为"+event.totalprice);
         if (event != null) {
             if (event.totalnum > 0) {
                 shopCartNum.setText(String.valueOf(event.totalnum));
@@ -181,6 +185,17 @@ public class BillActivity extends BaseActivity {
             }
             totalPrice.setText("¥" + (event.totalprice));
             discount = event.totalprice;
+            this.event = event;
+            commoditylist=event.goods;
+            for(int i =commoditylist.size()-1;i>=0;i--)
+            {
+                if (event.goodsNum[i] == 0)         //该商品销售量=0，删
+                    commoditylist.remove(i);
+                else
+                    getGoosNum.add(event.goodsNum[i]);//否则逆序保存销售量
+
+            }
+            Collections.reverse(getGoosNum);//倒置list
         }
     }
 

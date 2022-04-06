@@ -41,8 +41,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
     private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> dataList;
     private Context mContext;
 
-    private int []goodsNum;//-----单个商品的购买个数
-
+    private List<Integer> goodsNum;//-----单个商品的购买个数
     private int buyNum;
     private int totalPrice;
     private int[] mSectionIndices;
@@ -53,13 +52,12 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
     private List<GoodsListBean.DataEntity.GoodscategoryEntity> goodscategoryEntities;
     private String[] mSectionLetters;
     private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> selectGoods=new ArrayList<>(); // 保存用户购买的商品类个例
-    private MessageEvent event;
 
-    public BillAdapter(Context context, List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> items,MessageEvent event
+    public BillAdapter(Context context, List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> items,List<Integer> goodsNum
            ) {
         this.mContext = context;
         this.dataList = items;
-        this.event =event;
+        this.goodsNum = goodsNum;
         setHasStableIds(true);
     }
 
@@ -110,25 +108,18 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
                 R.drawable.bd,
                 R.drawable.mymms
         };
-        //获取单个购买量
-        if(event!=null){
-            int j=0;
-            for(int i=0;i<event.goodsNum.length;i++)
-            {
-                if(event.goodsNum[i]!=0)
-                {
-                    this.goodsNum[j++]=event.goodsNum[i];//删去”0“销量，解决list.remove()导致的位置不对应问题
-                }
-            }
-        }
-            holder.quantity1.setText(this.goodsNum[position]);//此时对应
+
 
         //获取品名
         holder.goodsCategoryName1.setText(dataList.get(position).getName());
-        //获取规格
-        holder.ismorestanderd1.setText(dataList.get(position).getcIndex());
+
         //获取单价
         holder.tvGoodsPrice1.setText("¥"+dataList.get(position).getPrice());
+
+        //获取单个购买量
+        holder.quantity1.setText("×"+goodsNum.get(position));
+        //获取规格
+        holder.ismorestanderd1.setText(dataList.get(position).getcIndex());
         //加载图片
         Glide
                 .with(mContext)
@@ -137,8 +128,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
                 .placeholder(R.mipmap.icon_logo_image_default)
                 .crossFade()
                 .into(holder.ivGoodsImage1);
-
-
     }
 
 

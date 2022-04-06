@@ -37,7 +37,7 @@ import com.example.xyz.orderingapp.entity.Evaluation;
 import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.MessageEvent;
 
-import com.example.xyz.orderingapp.fragment.BillFragment;
+
 import com.example.xyz.orderingapp.fragment.CommentFragment;
 
 import com.example.xyz.orderingapp.fragment.CommentFragment;
@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity {
 
     class MyButtonListener implements OnClickListener{
         public void onClick(View v) {
-            EventBus.getDefault().post(event);
+            EventBus.getDefault().postSticky(event);
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, BillActivity.class);
             MainActivity.this.startActivity(intent);
