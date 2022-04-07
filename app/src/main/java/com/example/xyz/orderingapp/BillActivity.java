@@ -146,7 +146,7 @@ public class BillActivity extends BaseActivity {
         setContentView(R.layout.billmain);
         initView();
         EventBus.getDefault().register(this);//注册
-       //initData();
+       initData();
         Dicount();
 
     }

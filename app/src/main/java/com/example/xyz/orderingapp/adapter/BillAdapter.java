@@ -119,7 +119,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
         //获取单个购买量
         holder.quantity1.setText("×"+goodsNum.get(position));
         //获取规格
-        holder.ismorestanderd1.setText(dataList.get(position).getcIndex());
+        if(dataList.get(position).getcIndex()!=888)
+        {
+            holder.ismorestanderd1.setText(dataList.get(position).getSpecifications()[dataList.get(position).getcIndex()]);
+        }
         //加载图片
         Glide
                 .with(mContext)
