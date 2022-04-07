@@ -85,6 +85,7 @@ public class MainActivity extends BaseActivity {
     private int FIRST_ITEM_INDEX;
     private int LAST_ITEM_INDEX;
     private int currentPos;
+    private int totalprice1=0;
     //private boolean isChanged;
     private boolean isAuto;
     private android.os.Handler handler;
@@ -131,11 +132,18 @@ public class MainActivity extends BaseActivity {
     }
 
     class MyButtonListener implements OnClickListener{
+
         public void onClick(View v) {
-            EventBus.getDefault().postSticky(event);
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, BillActivity.class);
-            MainActivity.this.startActivity(intent);
+            if(totalprice1!=0) {
+                EventBus.getDefault().postSticky(event);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, BillActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this, "购物车为空！", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -370,7 +378,7 @@ public class MainActivity extends BaseActivity {
             }
             totalPrice.setText("¥"+String.valueOf(event.totalprice));
             this.event=event;
-
+             totalprice1=event.totalprice;
 
         }
 

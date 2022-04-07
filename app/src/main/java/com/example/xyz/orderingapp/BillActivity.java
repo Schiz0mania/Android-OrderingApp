@@ -147,7 +147,7 @@ public class BillActivity extends BaseActivity {
         initView();
         EventBus.getDefault().register(this);//注册
        //initData();
-        dicount();
+        Dicount();
 
     }
 
@@ -186,6 +186,10 @@ public class BillActivity extends BaseActivity {
             totalPrice.setText("¥" + (event.totalprice));
             discount = event.totalprice;
             this.event = event;
+            for(int i=0;i<event.goodsNum.length;i++)    //log
+            {
+                Log.v("BillActivity",event.goods.get(i).getName()+" 商品数量 "+event.goodsNum[i]);
+            }
             commoditylist=event.goods;
             for(int i =commoditylist.size()-1;i>=0;i--)
             {
@@ -199,7 +203,7 @@ public class BillActivity extends BaseActivity {
         }
     }
 
-    public void dicount(){
+    public void Dicount(){
 
            checkoutBtn.setOnClickListener(new View.OnClickListener() {
 
