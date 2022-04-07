@@ -123,6 +123,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
         {
             holder.ismorestanderd1.setText(dataList.get(position).getSpecifications()[dataList.get(position).getcIndex()]);
         }
+        else
+        {
+            holder.ismorestanderd1.setVisibility(View.GONE);
+        }
         //加载图片
         Glide
                 .with(mContext)
