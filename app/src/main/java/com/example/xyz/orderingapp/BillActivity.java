@@ -214,7 +214,7 @@ public class BillActivity extends BaseActivity {
                 String s = "恭喜获得" + b + "折卷";
                 builder.setMessage(s);
 
-                builder.setPositiveButton("使用", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("使用优惠", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -223,7 +223,7 @@ public class BillActivity extends BaseActivity {
                         checkoutBtn.setText("已提交");
                     }
                 });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("直接提交", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
