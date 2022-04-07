@@ -10,21 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="13dp"
-        >
+        android:padding="12dp">
 
         <ImageView
-            android:id="@+id/ivGoodsImage1"
+            android:id="@+id/GoodsImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@mipmap/icon_logo_image_default"/>
+            android:background="@mipmap/icon_logo_image_default"
+            android:visibility="invisible" />
 
         <LinearLayout
-            android:id="@+id/goodsInfo1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/ivGoodsImage1"
+            android:id="@+id/GoodsInfo"
+            android:layout_width="324dp"
+            android:layout_height="62dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_toRightOf="@id/GoodsImage"
             android:orientation="vertical">
 
             <LinearLayout
@@ -33,17 +33,17 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/goodsCategoryName1"
+                    android:id="@+id/GoodsName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="鸡汤肥牛煲"
-                    android:textStyle="bold"
+                    android:text="菜名"
                     android:textColor="@color/color_333"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvGoodsPrice1"
+                    android:id="@+id/GoodsPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¥10.00"
@@ -60,10 +60,10 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/quantity1"
+                    android:id="@+id/Quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="×0"
                     android:textColor="@color/color_red"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -72,12 +72,12 @@
 
 
             <TextView
-                android:id="@+id/ismorestanderd1"
+                android:id="@+id/Specification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:maxLines="2"
-                android:text="默认"
+                android:text="规格"
                 android:textColor="#444444"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -85,10 +85,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/goodsInfo1"
+            android:layout_below="@id/GoodsInfo"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/ivGoodsImage1"
+            android:layout_toRightOf="@id/GoodsImage"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

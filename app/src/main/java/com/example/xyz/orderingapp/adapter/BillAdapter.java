@@ -1,34 +1,18 @@
 package com.example.xyz.orderingapp.adapter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.RotateAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.xyz.orderingapp.MainActivity;
 import com.example.xyz.orderingapp.R;
 import com.example.xyz.orderingapp.entity.GoodsListBean;
-import com.example.xyz.orderingapp.event.GoodsListEvent;
-import com.example.xyz.orderingapp.event.MessageEvent;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,79 +69,47 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(final BillAdapter.ViewHolder holder, final int position) {
 
-        int id[] = {R.drawable.nnnzb,
-                R.drawable.ksj,
-                R.drawable.krbf,
-                R.drawable.zjklt,
-                R.drawable.lbhg,
-                R.drawable.xhlcjd,
-                R.drawable.scxlh,
-                R.drawable.dsx,
-                R.drawable.xhb,
-                R.drawable.zj,
-                R.drawable.fqym,
-                R.drawable.st,
-                R.drawable.xb,
-                R.drawable.adn,
-                R.drawable.cole,
-                R.drawable.md,
-                R.drawable.yb,
-                R.drawable.hpj,
-                R.drawable.psdt,
-                R.drawable.llqc,
-                R.drawable.bd,
-                R.drawable.mymms
-        };
-
 
         //获取品名
-        holder.goodsCategoryName1.setText(dataList.get(position).getName());
+        holder.GoodsName.setText(dataList.get(position).getName());
 
         //获取单价
-        holder.tvGoodsPrice1.setText("¥"+dataList.get(position).getPrice());
+        holder.GoodsPrice.setText("¥"+dataList.get(position).getPrice());
 
         //获取单个购买量
-        holder.quantity1.setText("×"+goodsNum.get(position));
+        holder.Quantity.setText("×"+goodsNum.get(position));
         //获取规格
         if(dataList.get(position).getcIndex()!=888)
         {
-            holder.ismorestanderd1.setText(dataList.get(position).getSpecifications()[dataList.get(position).getcIndex()]);
+            holder.Specification.setText(dataList.get(position).getSpecifications()[dataList.get(position).getcIndex()]);
         }
         else
         {
-            holder.ismorestanderd1.setVisibility(View.GONE);
+            holder.Specification.setVisibility(View.GONE);
         }
-        //加载图片
-        Glide
-                .with(mContext)
-                .load(id[position])
-                .centerCrop()
-                .placeholder(R.mipmap.icon_logo_image_default)
-                .crossFade()
-                .into(holder.ivGoodsImage1);
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public final ImageView ivGoodsImage1;
-        public final TextView goodsCategoryName1;
-        public final TextView quantity1;
-        public final LinearLayout goodsInfo1;
-        public final TextView tvGoodsPrice1;
-        public final TextView ismorestanderd1;
+        public final ImageView GoodsImage;
+        public final TextView GoodsName;
+        public final TextView Quantity;
+        public final LinearLayout GoodsInfo;
+        public final TextView GoodsPrice;
+        public final TextView Specification;
         public final View root;
 
 
 
         public ViewHolder(View root) {
             super(root);
-            ivGoodsImage1 = (ImageView) root.findViewById(R.id.ivGoodsImage1);
-            goodsCategoryName1 = (TextView) root.findViewById(R.id.goodsCategoryName1);
-            quantity1 = (TextView) root.findViewById(R.id.quantity1);
-            goodsInfo1 = (LinearLayout) root.findViewById(R.id.goodsInfo1);
-            tvGoodsPrice1 = (TextView) root.findViewById(R.id.tvGoodsPrice1);
-            ismorestanderd1 = (TextView) root.findViewById(R.id.ismorestanderd1);
+            GoodsImage = (ImageView) root.findViewById(R.id.GoodsImage);
+            GoodsName = (TextView) root.findViewById(R.id.GoodsName);
+            Quantity = (TextView) root.findViewById(R.id.Quantity);
+            GoodsInfo = (LinearLayout) root.findViewById(R.id.GoodsInfo);
+            GoodsPrice = (TextView) root.findViewById(R.id.GoodsPrice);
+            Specification = (TextView) root.findViewById(R.id.Specification);
             this.root = root;
         }
     }

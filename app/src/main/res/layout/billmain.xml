@@ -14,7 +14,7 @@
         >
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/bill_recycleView1"
+            android:id="@+id/bill_recycleView"
             android:layout_width="398dp"
             android:layout_height="618dp"
             android:layout_below="@+id/goodsInfo"
