@@ -94,16 +94,18 @@ public class CommentFragment extends BaseFragment {
 
         //read to jsonstr
         String tmpstr =readComment();
-        Evaluation tmp=null;
+
         commentList = new Evaluation();
+
         if(tmpstr == null){
             // 初始化数据
             commentList = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext(),"comment.json"), Evaluation.class);
+
         }else {
             //jsonstr to class entity
             JSONObject jsonObject = JSONObject.parseObject(tmpstr);
-            tmp = JSONObject.toJavaObject(jsonObject, Evaluation.class);
-            commentList=tmp;
+            commentList = JSONObject.toJavaObject(jsonObject, Evaluation.class);
+
         }
 
 
@@ -166,14 +168,14 @@ public class CommentFragment extends BaseFragment {
             String temp;
             while ((temp = bufferedReader.readLine()) != null) {
                 result.append(temp);
+
             }
             return result.toString();
 
 
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
-        } finally {
+            Log.v("comment","failed");
             return null;
         }
 
