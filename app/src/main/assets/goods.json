@@ -86,7 +86,7 @@
           },
           {
             "name": "烤鸡",
-            "price": 12,
+            "price": 20,
             "introduce": "它生前活得很自在，就是有点中暑了",
             "goodsImgUrl": "xxxxx",
             "moreStandard": false
@@ -115,35 +115,35 @@
       "goodsitem": [
         {
           "name": "82雪碧",
-          "price": 12,
+          "price": 10,
           "introduce": "其实是72年的",
           "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "哇哈哈AD钙奶",
-          "price": 12,
+          "price": 5,
           "introduce": "童年味道我知道",
           "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "快乐水",
-          "price": 12,
+          "price": 6,
           "introduce": "听说你不快乐？",
           "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "脉动",
-          "price": 12,
+          "price": 7,
           "introduce": "脉动回来",
           "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "怡宝",
-          "price": 12,
+          "price": 3,
           "introduce": "官方指定一氧化二氢原料",
           "goodsImgUrl": "xxxxx",
           "moreStandard": false
