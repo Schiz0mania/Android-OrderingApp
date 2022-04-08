@@ -14,6 +14,7 @@ import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.example.xyz.orderingapp.R;
 import com.example.xyz.orderingapp.adapter.CommentAdapter;
 import com.example.xyz.orderingapp.entity.Evaluation;
+import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.GoodsListEvent;
 import com.example.xyz.orderingapp.myinterface.SimpleItemTouchHelperCallback;
@@ -89,16 +90,26 @@ public class CommentFragment extends BaseFragment {
 
     }
     public void initData(){
-        // 初始化数据
+
+
         //read to jsonstr
         String tmpstr =readComment();
-        //jsonstr to class entity
-        JSONObject jsonObject = JSONObject.parseObject(tmpstr);
-        Evaluation tmp = JSONObject.toJavaObject(jsonObject, Evaluation.class);
-
-
+        Evaluation tmp=null;
         commentList = new Evaluation();
-        commentList=tmp;
+        if(tmpstr == null){
+            // 初始化数据
+            commentList = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext(),"comment.json"), Evaluation.class);
+        }else {
+            //jsonstr to class entity
+            JSONObject jsonObject = JSONObject.parseObject(tmpstr);
+            tmp = JSONObject.toJavaObject(jsonObject, Evaluation.class);
+            commentList=tmp;
+        }
+
+
+
+
+
 
 
         // 设置adapter
@@ -161,31 +172,11 @@ public class CommentFragment extends BaseFragment {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
+            return null;
         }
-    return null;
+
 
     }
     public void writeComment(String text){
