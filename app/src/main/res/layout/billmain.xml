@@ -16,16 +16,16 @@
 
         <TextView
             android:id="@+id/Output"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="300dp"
+            android:layout_height="44dp"
             android:layout_below="@+id/bill_recycleView"
-            android:layout_marginStart="-110dp"
-            android:layout_marginLeft="-166dp"
-            android:layout_marginTop="-41dp"
+            android:layout_marginStart="-130dp"
+            android:layout_marginLeft="-134dp"
+            android:layout_marginTop="-44dp"
             android:layout_toRightOf="@id/bill_recycleView"
             android:text="总价:  88888"
             android:textColor="@color/color_333"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 

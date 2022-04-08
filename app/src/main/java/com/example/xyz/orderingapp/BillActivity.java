@@ -81,6 +81,7 @@ public class BillActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void MessageEvent(MessageEvent event) {
 
+
         Log.v("BillActivity","商品总价为"+event.totalprice);
         if (event != null) {
             if (event.totalnum > 0) {
@@ -96,6 +97,8 @@ public class BillActivity extends BaseActivity {
             totalPrice.setText("¥" + (event.totalprice));
             discount = event.totalprice;
             this.event = event;
+
+
             for(int i=0;i<event.goodsNum.length;i++)    //log
             {
                 Log.v("BillActivity",event.goods.get(i).getName()+" 商品数量 "+event.goodsNum[i]);
