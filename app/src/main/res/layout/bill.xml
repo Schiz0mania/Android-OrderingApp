@@ -17,13 +17,13 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@mipmap/icon_logo_image_default"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/GoodsInfo"
             android:layout_width="324dp"
             android:layout_height="62dp"
-            android:layout_marginLeft="-4dp"
+            android:layout_marginLeft="6dp"
             android:layout_toRightOf="@id/GoodsImage"
             android:orientation="vertical">
 
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¥10.00"
-                    android:textColor="@color/color_red"
+                    android:textColor="@color/color_333"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="×0"
-                    android:textColor="@color/color_red"
+                    android:textColor="@color/color_333"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

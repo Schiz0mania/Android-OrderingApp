@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -8,15 +9,30 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        android:padding="13dp"
-        >
+        android:padding="13dp">
+
+
+        <TextView
+            android:id="@+id/Output"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/bill_recycleView"
+            android:layout_marginStart="-110dp"
+            android:layout_marginLeft="-166dp"
+            android:layout_marginTop="-41dp"
+            android:layout_toRightOf="@id/bill_recycleView"
+            android:text="总价:  88888"
+            android:textColor="@color/color_333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/bill_recycleView"
-            android:layout_width="398dp"
-            android:layout_height="618dp"
+            android:layout_width="453dp"
+            android:layout_height="702dp"
             android:layout_below="@+id/goodsInfo"
             android:layout_marginTop="9dp"
             android:clipToPadding="false"
@@ -47,26 +63,20 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="商品名称"
-                    android:textStyle="bold"
                     android:textColor="@color/color_333"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvGoodsPrice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="单价"
                     android:textColor="@color/color_333"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
 
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/quantity"
@@ -81,13 +91,11 @@
 
         </LinearLayout>
 
-
-
-
     </RelativeLayout>
+
     <include
         layout="@layout/shop_sub"
-        ></include>
+        android:visibility="visible"></include>
 
 </RelativeLayout>
 

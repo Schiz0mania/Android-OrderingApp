@@ -22,7 +22,7 @@
         />
 
     <TextView
-        android:id="@+id/shopCartNum1"
+        android:id="@+id/ShopCartNum"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginLeft="10dp"
@@ -37,7 +37,7 @@
 
 
     <TextView
-        android:id="@+id/totalPrice1"
+        android:id="@+id/TotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -51,7 +51,7 @@
 
 
     <TextView
-        android:id="@+id/noShop1"
+        android:id="@+id/NoShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -65,7 +65,7 @@
 
 
     <Button
-        android:id="@+id/CheckOut1"
+        android:id="@+id/CheckOutBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

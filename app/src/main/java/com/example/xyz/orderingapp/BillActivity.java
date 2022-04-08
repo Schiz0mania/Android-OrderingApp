@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.xyz.orderingapp.adapter.BillAdapter;
 import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.MessageEvent;
+import com.example.xyz.orderingapp.utils.AnimationUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,6 +37,7 @@ public class BillActivity extends BaseActivity {
     private TextView shopCartNum;
     private TextView totalPrice;
     private TextView noShop;
+    private TextView Output;
     private Button checkoutBtn;
     private int discount;
     private boolean clicktime=true;
@@ -42,6 +45,8 @@ public class BillActivity extends BaseActivity {
     private MessageEvent event;
     private LinearLayoutManager mLinearLayoutManager;
     private List<Integer> getGoosNum=new ArrayList<Integer>();
+    private List<Integer> getGoosId=new ArrayList<Integer>();
+    private RelativeLayout shopCartMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +61,20 @@ public class BillActivity extends BaseActivity {
 
     private void initView() {
 
-        shopCartNum = (TextView) findViewById(R.id.shopCartNum1);
-        totalPrice = (TextView) findViewById(R.id.totalPrice1);
-        noShop = (TextView) findViewById(R.id.noShop1);
-        checkoutBtn = (Button) findViewById(R.id.CheckOut1);
+        shopCartMain=(RelativeLayout)findViewById(R.id.shopCartMain);
+        shopCartNum = (TextView) findViewById(R.id.ShopCartNum);
+        totalPrice = (TextView) findViewById(R.id.TotalPrice);
+        noShop = (TextView) findViewById(R.id.NoShop);
+        checkoutBtn = (Button) findViewById(R.id.CheckOutBTN);
         recyclerView = (RecyclerView) findViewById(R.id.bill_recycleView);
+        Output=(TextView)findViewById(R.id.Output);
     }
 
     private void initData() {
 
         mLinearLayoutManager =new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLinearLayoutManager);
-        billAdapter = new BillAdapter(this,commoditylist,getGoosNum);
+        billAdapter = new BillAdapter(this,commoditylist,getGoosNum,getGoosId);
         billAdapter.setmActivity(this);
         recyclerView.setAdapter(billAdapter);
     }
@@ -99,10 +106,13 @@ public class BillActivity extends BaseActivity {
                 if (event.goodsNum[i] == 0)         //该商品销售量=0，删
                     commoditylist.remove(i);
                 else
+                    {
                     getGoosNum.add(event.goodsNum[i]);//否则逆序保存销售量
-
+                    getGoosId.add(i);
+                }
             }
             Collections.reverse(getGoosNum);//倒置list
+            Collections.reverse(getGoosId);
         }
     }
 
@@ -126,8 +136,9 @@ public class BillActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         Toast.makeText(BillActivity.this, "使用优惠成功", Toast.LENGTH_SHORT).show();
-                        totalPrice.setText("¥" + (Double.valueOf(discount * b) / 10));
-                        checkoutBtn.setText("已提交");
+                        Output.setVisibility(View.VISIBLE);
+                        Output.setText("总价：¥" + (Double.valueOf(discount * b) / 10));
+                       // checkoutBtn.setText("已提交");
                     }
                 });
                 builder.setNegativeButton("直接提交", new DialogInterface.OnClickListener() {
@@ -135,16 +146,22 @@ public class BillActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         Toast.makeText(BillActivity.this, "未使用优惠", Toast.LENGTH_SHORT).show();
-                        checkoutBtn.setText("已提交");
+                        Output.setVisibility(View.VISIBLE);
+                        Output.setText("总价：¥"+ discount);
+                        //  checkoutBtn.setText("已提交");
                     }
                 });
                 AlertDialog alert = builder.create();
                 alert.show();
+                //shopCartMain.setVisibility(View.GONE);
+                    shopCartMain.startAnimation(
+                            AnimationUtil.createOutAnimation(BillActivity.this, shopCartMain.getMeasuredHeight()));
+
             }
-                else
+              /*  else
                     {
                         Toast.makeText(BillActivity.this, "请勿重复提交", Toast.LENGTH_SHORT).show();
-                }
+                }*/
         }
         }
         );

@@ -26,6 +26,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
     private Context mContext;
 
     private List<Integer> goodsNum;//-----单个商品的购买个数
+    private List<Integer> goodsId;
     private int buyNum;
     private int totalPrice;
     private int[] mSectionIndices;
@@ -37,11 +38,12 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
     private String[] mSectionLetters;
     private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> selectGoods=new ArrayList<>(); // 保存用户购买的商品类个例
 
-    public BillAdapter(Context context, List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> items,List<Integer> goodsNum
+    public BillAdapter(Context context, List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> items,List<Integer> goodsNum,List<Integer> goodsId
            ) {
         this.mContext = context;
         this.dataList = items;
         this.goodsNum = goodsNum;
+        this.goodsId = goodsId;
         setHasStableIds(true);
     }
 
@@ -69,7 +71,29 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(final BillAdapter.ViewHolder holder, final int position) {
 
-
+        final int id[] = {R.drawable.nnnzb,
+                R.drawable.ksj,
+                R.drawable.krbf,
+                R.drawable.zjklt,
+                R.drawable.lbhg,
+                R.drawable.xhlcjd,
+                R.drawable.scxlh,
+                R.drawable.dsx,
+                R.drawable.xhb,
+                R.drawable.zj,
+                R.drawable.fqym,
+                R.drawable.st,
+                R.drawable.xb,
+                R.drawable.adn,
+                R.drawable.cole,
+                R.drawable.md,
+                R.drawable.yb,
+                R.drawable.hpj,
+                R.drawable.psdt,
+                R.drawable.llqc,
+                R.drawable.bd,
+                R.drawable.mymms
+        };
         //获取品名
         holder.GoodsName.setText(dataList.get(position).getName());
 
@@ -87,6 +111,13 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
         {
             holder.Specification.setVisibility(View.GONE);
         }
+        Glide
+                .with(mContext)
+                .load(id[goodsId.get(position)])
+                .centerCrop()
+                .placeholder(R.mipmap.icon_logo_image_default)
+                .crossFade()
+                .into(holder.GoodsImage);
     }
 
 
