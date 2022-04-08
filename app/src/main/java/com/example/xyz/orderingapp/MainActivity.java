@@ -36,16 +36,25 @@ import com.example.xyz.orderingapp.adapter.TabFragmentAdapter;
 import com.example.xyz.orderingapp.entity.Evaluation;
 import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.MessageEvent;
+
+
 import com.example.xyz.orderingapp.fragment.CommentFragment;
+
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
+
+import android.content.Intent;
+import android.view.View.OnClickListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+// test for git actions
 public class MainActivity extends BaseActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout; // 滑动展示
     private AppBarLayout appBarLayout;
@@ -64,6 +73,7 @@ public class MainActivity extends BaseActivity {
     private TextView noShop;
     private RelativeLayout shopCartMain;
     private ViewGroup anim_mask_layout;//动画层
+
     private Button checkoutBtn;
     private FloatingActionButton addComment;
 
@@ -74,9 +84,11 @@ public class MainActivity extends BaseActivity {
     private int FIRST_ITEM_INDEX;
     private int LAST_ITEM_INDEX;
     private int currentPos;
+    private int totalprice1=0;
     //private boolean isChanged;
     private boolean isAuto;
     private android.os.Handler handler;
+    private MessageEvent event;
 
     private Evaluation addedCommentData;
 
@@ -90,7 +102,7 @@ public class MainActivity extends BaseActivity {
         initView();
         initImage();
         setViewPager();
-
+        checkoutBtn.setOnClickListener(new MyButtonListener());
     }
 
     private void initView() {
@@ -117,6 +129,24 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
+    class MyButtonListener implements OnClickListener{
+
+        public void onClick(View v) {
+            if(totalprice1!=0) {
+                EventBus.getDefault().postSticky(event);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, BillActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this, "购物车为空！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
     private  void initImage(){
         int[] resIds=new int[]{
@@ -186,7 +216,6 @@ public class MainActivity extends BaseActivity {
 
         mTitles.add("商品");
         mTitles.add("评价");
-
 
         adapter=new TabFragmentAdapter(getSupportFragmentManager(),mFragments,mTitles);
         viewPager.setAdapter(adapter);
@@ -326,8 +355,8 @@ public class MainActivity extends BaseActivity {
     @Subscribe()
     public void onMessageEvent(MessageEvent event) {
 
-        if(event!=null){
 
+        if(event!=null){
             if(event.eventtype == 1){
                 Log.v("MainActivity","商品"+event.goods.get(event.index).getName() + "增加1"+",此时总量为"+event.goodsNum[event.index]);
             }else if(event.eventtype == -1){
@@ -347,14 +376,15 @@ public class MainActivity extends BaseActivity {
                 noShop.setVisibility(View.VISIBLE);
             }
             totalPrice.setText("¥"+String.valueOf(event.totalprice));
-
+            this.event=event;
+             totalprice1=event.totalprice;
 
         }
 
     }
     @Subscribe
     public void addCommentEvent(CommentEvent e){
-        addedCommentData.changeData(e.getNewComment());
+        addedCommentData.addData(e.getNewComment());
     }
 
 
@@ -458,10 +488,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onStop() {
-
-
         super.onStop();
         EventBus.getDefault().unregister(this);
 
     }
+
+
+
 }

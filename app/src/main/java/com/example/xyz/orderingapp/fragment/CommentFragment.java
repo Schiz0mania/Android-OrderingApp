@@ -1,19 +1,14 @@
 package com.example.xyz.orderingapp.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.example.xyz.orderingapp.R;
@@ -22,7 +17,6 @@ import com.example.xyz.orderingapp.entity.Evaluation;
 import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.CommentEvent;
 import com.example.xyz.orderingapp.event.GoodsListEvent;
-import com.example.xyz.orderingapp.myinterface.ItemTouchHelperAdapter;
 import com.example.xyz.orderingapp.myinterface.SimpleItemTouchHelperCallback;
 import com.example.xyz.orderingapp.utils.DataUtils;
 
@@ -30,8 +24,19 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.alibaba.fastjson.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * Created by xhh on 2022/4/3.
@@ -85,14 +90,28 @@ public class CommentFragment extends BaseFragment {
 
     }
     public void initData(){
-        // 初始化数据
-        Evaluation tmp = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext(),"comment.json"), Evaluation.class);
+
+
+        //read to jsonstr
+        String tmpstr =readComment();
 
         commentList = new Evaluation();
-        commentList=tmp;
-        for(Evaluation.Comment i : commentList.getData()){
-            i.setNewPosted(false);
+
+        if(tmpstr == null){
+            // 初始化数据
+            commentList = DataUtils.GsonToBean(DataUtils.getJsontoString(getContext(),"comment.json"), Evaluation.class);
+
+        }else {
+            //jsonstr to class entity
+            JSONObject jsonObject = JSONObject.parseObject(tmpstr);
+            commentList = JSONObject.toJavaObject(jsonObject, Evaluation.class);
+
         }
+
+
+
+
+
 
 
         // 设置adapter
@@ -112,8 +131,73 @@ public class CommentFragment extends BaseFragment {
     @Subscribe
     public void addCommentEvent(CommentEvent e){
 
-        commentList.changeData(e.getNewComment());
+        commentList.addData(e.getNewComment());
         commentAdapter.notifyDataSetChanged();
+
+
+    }
+
+    @Override
+    public void onDestroy() {
+        //设置下次不可删除
+        for(Evaluation.Comment i : commentList.getData()){
+            i.setNewPosted(false);
+        }
+        //commentList首先转json字串
+        String str = JSONObject.toJSONString(commentList);
+        // 写数据
+        writeComment(str);
+
+
+
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    //
+    public String readComment(){
+        InputStream inputStream = null;
+        Reader reader = null;
+        BufferedReader bufferedReader = null;
+        try {
+
+            File file=new File(getContext().getFilesDir().getPath(), "comments.json");
+            inputStream = new FileInputStream(file);
+            reader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(reader);
+            StringBuilder result = new StringBuilder();
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                result.append(temp);
+
+            }
+            return result.toString();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.v("comment","failed");
+            return null;
+        }
+
+
+    }
+    public void writeComment(String text){
+        File file1=new File(getContext().getFilesDir().getPath(),"comments.json");
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file1);
+            fileOutputStream.write(text.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
     }

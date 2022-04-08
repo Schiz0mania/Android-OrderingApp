@@ -22,7 +22,7 @@ public class Evaluation {
         this.data.add(e);
 
     }
-    public void changeData(Comment newComment){
+    public void addData(Comment newComment){
         this.data.add(newComment);
 
     }

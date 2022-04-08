@@ -28,6 +28,7 @@
             android:layout_gravity="left"
             android:text="user_name"
             android:textSize="12sp"
+            android:textStyle="bold"
             android:background="@drawable/textview_container"
 
             />
@@ -37,7 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user_comment"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:autoSizeTextType="uniform"
 
             />
     </LinearLayout>
