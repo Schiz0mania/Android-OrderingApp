@@ -21,9 +21,13 @@ import com.example.xyz.orderingapp.entity.GoodsListBean;
 import com.example.xyz.orderingapp.event.GoodsListEvent;
 import com.example.xyz.orderingapp.utils.DataUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,5 +197,6 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
         }
 
     }
+
 
 }

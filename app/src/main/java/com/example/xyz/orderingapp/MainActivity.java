@@ -40,19 +40,18 @@ import com.example.xyz.orderingapp.event.MessageEvent;
 
 import com.example.xyz.orderingapp.fragment.CommentFragment;
 
-import com.example.xyz.orderingapp.fragment.CommentFragment;
-
 import com.example.xyz.orderingapp.fragment.GoodsFragment;
 import com.example.xyz.orderingapp.utils.AnimationUtil;
-import android.app.Activity;
+
 import android.content.Intent;
-import android.view.View;//注意view的大小写
 import android.view.View.OnClickListener;
-import android.os.Bundle;
-import android.widget.Button;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 // test for git actions
@@ -385,7 +384,7 @@ public class MainActivity extends BaseActivity {
     }
     @Subscribe
     public void addCommentEvent(CommentEvent e){
-        addedCommentData.changeData(e.getNewComment());
+        addedCommentData.addData(e.getNewComment());
     }
 
 
@@ -489,10 +488,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onStop() {
-
-
         super.onStop();
         EventBus.getDefault().unregister(this);
 
     }
+
+
+
 }
