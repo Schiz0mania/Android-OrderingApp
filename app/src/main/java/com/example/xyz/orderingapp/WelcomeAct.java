@@ -7,13 +7,22 @@ import android.view.WindowManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import com.example.xyz.orderingapp.view.CTextView;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.animation.AnimationUtils;
 
 
 public class WelcomeAct extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
+
+
+        CTextView cTextView = (CTextView) findViewById(R.id.textView);
+        cTextView.setText("    欢迎使用点餐app",  330);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         startMainActivity();
     }
@@ -29,6 +38,6 @@ public class WelcomeAct extends Activity {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(delayTask,2000);//延时两秒执行 run 里面的操作
+        timer.schedule(delayTask,4000);//延时两秒执行 run 里面的操作
     }
 }
