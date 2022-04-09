@@ -131,7 +131,7 @@ public class BillActivity extends BaseActivity {
                 final int b = random.nextInt(9) % (5) + 5;//5-9折
                 AlertDialog.Builder builder = new AlertDialog.Builder(BillActivity.this);
                 builder.setTitle("随机优惠");
-                String s = "恭喜获得" + b + "折卷";
+                String s = "疫情原因，随机发放" + b + "折卷,以响应国家抗疫政策";
                 builder.setMessage(s);
 
                 builder.setPositiveButton("使用优惠", new DialogInterface.OnClickListener() {
@@ -142,16 +142,6 @@ public class BillActivity extends BaseActivity {
                         Output.setVisibility(View.VISIBLE);
                         Output.setText("总价：¥" + (Double.valueOf(discount * b) / 10));
                        // checkoutBtn.setText("已提交");
-                    }
-                });
-                builder.setNegativeButton("直接提交", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Toast.makeText(BillActivity.this, "未使用优惠", Toast.LENGTH_SHORT).show();
-                        Output.setVisibility(View.VISIBLE);
-                        Output.setText("总价：¥"+ discount);
-                        //  checkoutBtn.setText("已提交");
                     }
                 });
                 AlertDialog alert = builder.create();
