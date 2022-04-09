@@ -49,48 +49,52 @@ import android.view.View.OnClickListener;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-// test for git actions
+
 public class MainActivity extends BaseActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout; // 滑动展示
-    private AppBarLayout appBarLayout;
-    private TabLayout slidingTabLayout;
+    private AppBarLayout appBarLayout;// 与上一个collapsingbar联动使用
+    private TabLayout slidingTabLayout; //管理商品与评论两个frag区
+
     //fragment列表
     private List<Fragment> mFragments=new ArrayList<>();
-    private GoodsFragment  goodsFragment;
-    private CommentFragment  commentFragment ;
+    private GoodsFragment  goodsFragment; //商品
+    private CommentFragment  commentFragment ;//评论
+
     //tab名的列表
     private List<String> mTitles=new ArrayList<>();
 
     private ViewPager viewPager;
     private TabFragmentAdapter adapter;
-    private TextView shopCartNum;
-    private TextView totalPrice;
-    private TextView noShop;
+
+    // 下方购物车布局部件
     private RelativeLayout shopCartMain;
+    private TextView shopCartNum;// 总数 显示在小红球内
+    //总价
+    private TextView totalPrice;
+    private int totalprice =0;
+    private TextView noShop;// 与总价一起使用，购物车为空时显示“购物车为空”，否则显示当前总价
+
     private ViewGroup anim_mask_layout;//动画层
 
-    private Button checkoutBtn;
-    private FloatingActionButton addComment;
+    private Button checkoutBtn;// 结算按钮（提交订单）
+    private FloatingActionButton addComment;// 添加评论按钮
 
-
+    // 完成图片自动轮播与支持手动滑动的部分
     private ViewPager imgVp;
     private ImageAdapter imageAdapter;
     private int resSize;
     private int FIRST_ITEM_INDEX;
     private int LAST_ITEM_INDEX;
     private int currentPos;
-    private int totalprice1=0;
-    //private boolean isChanged;
     private boolean isAuto;
     private android.os.Handler handler;
+
+    // 购物车PersonAdapter事件，EventBus处理
     private MessageEvent event;
 
-    private Evaluation addedCommentData;
+
 
 
     @Override
@@ -106,6 +110,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        //基础布局
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         slidingTabLayout = (TabLayout) findViewById(R.id.slidinglayout);
         viewPager = (ViewPager) findViewById(R.id.vp);
@@ -114,11 +120,14 @@ public class MainActivity extends BaseActivity {
         shopCartNum=(TextView)findViewById(R.id.shopCartNum);
         totalPrice=(TextView)findViewById(R.id.totalPrice);
         noShop=(TextView)findViewById(R.id.noShop);
+
+        //轮播部分
         imgVp=findViewById(R.id.scrollView);
-        addComment = findViewById(R.id.fabAdd);
         handler = new android.os.Handler();
         task.run();
 
+        //添加评价部分
+        addComment = findViewById(R.id.fabAdd);
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,25 +139,12 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    class MyButtonListener implements OnClickListener{
-
-        public void onClick(View v) {
-            if(totalprice1!=0) {
-                EventBus.getDefault().postSticky(event);
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, BillActivity.class);
-                MainActivity.this.startActivity(intent);
-            }
-            else
-            {
-                Toast.makeText(MainActivity.this, "购物车为空！", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
 
 
-    private  void initImage(){
+    // 图片轮播
+
+    private  void initImage(){// 初始化数据
         int[] resIds=new int[]{
                 R.drawable.ksj,
                 R.drawable.krbf,
@@ -172,7 +168,8 @@ public class MainActivity extends BaseActivity {
         }
         images.add(createImage(resIds[0]));
     }
-    private ImageView createImage(int resId){
+
+    private ImageView createImage(int resId){// glide加载图片
         ImageView img=new ImageView(this);
         img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(this)
@@ -181,7 +178,8 @@ public class MainActivity extends BaseActivity {
                 .into(img);
         return img;
     }
-    private Runnable task = new Runnable() {
+
+    private Runnable task = new Runnable() {// 处理轮播与点击延迟操作的runnable
         @Override
         public void run() {
 
@@ -208,12 +206,11 @@ public class MainActivity extends BaseActivity {
     private void setViewPager() {
 
         goodsFragment=new GoodsFragment();
-       commentFragment = new CommentFragment();
+        commentFragment = new CommentFragment();
 
 
         mFragments.add(goodsFragment);
         mFragments.add(commentFragment);
-
         mTitles.add("商品");
         mTitles.add("评价");
 
@@ -221,6 +218,8 @@ public class MainActivity extends BaseActivity {
         viewPager.setAdapter(adapter);
         imgVp.setAdapter(imageAdapter);
         slidingTabLayout.setupWithViewPager(viewPager);
+
+        // 监听 商品页与评价页面的滑动切换（包含动画）
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -228,7 +227,7 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position) {//切换的动画逻辑
                 switch (position){
                     case 0:
                         addComment.setVisibility(View.GONE);
@@ -261,7 +260,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-        imgVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        imgVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {//轮播的手动滑动切换逻辑
             private int position;
             private int oldpos;
             @Override
@@ -302,6 +301,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    //添加评论按钮点击后的事件处理，由EventBus发出事件，CommentAdapter响应，完成刷新与数据更新
     public  void showDialog(final Context context){
         LayoutInflater factory = LayoutInflater.from(context);
         final View textEntryView = factory.inflate(R.layout.comment_commit, null);
@@ -326,7 +326,7 @@ public class MainActivity extends BaseActivity {
         ad1.show();// 显示对话框
     }
 
-
+    //collapsingToolbarLayout初始化
     private void setCollsapsing() {
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(R.color.white));
@@ -377,15 +377,12 @@ public class MainActivity extends BaseActivity {
             }
             totalPrice.setText("¥"+String.valueOf(event.totalprice));
             this.event=event;
-             totalprice1=event.totalprice;
+             totalprice =event.totalprice;
 
         }
 
     }
-    @Subscribe
-    public void addCommentEvent(CommentEvent e){
-        addedCommentData.addData(e.getNewComment());
-    }
+
 
 
     /**
@@ -491,6 +488,23 @@ public class MainActivity extends BaseActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
 
+    }
+
+
+    class MyButtonListener implements OnClickListener{
+
+        public void onClick(View v) {
+            if(totalprice !=0) {
+                EventBus.getDefault().postSticky(event);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, BillActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this, "购物车为空！", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
