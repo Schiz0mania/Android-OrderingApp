@@ -90,7 +90,12 @@ public class CommentFragment extends BaseFragment {
 
     }
     public void initData(){
-
+        /*
+        * 第一次安装后开启app的初始化，由assets内部的comment.json完成，相当于初始化数据文件（单机app）
+        * 后续的话用户增该的数据都会写入/data/data/对应的 comments.json内部
+        * 那么后续开启应用的初始化时，就会载入上次用户上传的Comment了
+        *
+        * */
 
         //read to jsonstr
         String tmpstr =readComment();
@@ -107,10 +112,6 @@ public class CommentFragment extends BaseFragment {
             commentList = JSONObject.toJavaObject(jsonObject, Evaluation.class);
 
         }
-
-
-
-
 
 
 

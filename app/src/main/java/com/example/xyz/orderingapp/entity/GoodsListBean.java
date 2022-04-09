@@ -63,21 +63,23 @@ public class GoodsListBean implements Serializable {
 
             public static class GoodsitemEntity {
                 /**
-                 * id：1
+                 * id：1   后续数据适配的id
                  * name : 苹果
                  * price : 10
                  * introduce : 苹果好吃啊，很甜！
                  * goodsImgUrl : ""
-                 * moreStandard : false  后续选规格参数
+                 * moreStandard : false  后续选规格参数，是否能选规格
+                 * specifications : ["微辣","中辣","重辣"]
+                 * cIndex : 0   对应上面的选中的下标值
                  */
-                private int id;   // 类别id
+                private int id;
                 private String name;
                 private int price;
                 private String introduce;
                 private String goodsImgUrl;
                 private boolean moreStandard;
                 private String[] specifications;
-                private int cIndex =888;  // 对应上面选择的规格值
+                private int cIndex ;  // 对应上面选择的规格值
 
                 public int getId() {
                     return id;

@@ -27,7 +27,7 @@ public class Evaluation {
 
     }
 
-    public static class Comment{
+    public static class Comment{// 用户名，用户评论，是否最新发布（相对于本次启动而言）
         private String name ;
         private String comments;
         private boolean isNewPosted;

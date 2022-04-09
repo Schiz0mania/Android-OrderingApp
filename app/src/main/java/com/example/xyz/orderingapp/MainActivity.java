@@ -156,7 +156,7 @@ public class MainActivity extends BaseActivity {
         resSize=images.size();
         imageAdapter=new ImageAdapter(this,images);
         imgVp.setAdapter(imageAdapter);
-        imgVp.setCurrentItem(1);
+        imgVp.setCurrentItem(0);
         FIRST_ITEM_INDEX=1;
         LAST_ITEM_INDEX=images.size()-2;
         isAuto = true;
@@ -192,8 +192,8 @@ public class MainActivity extends BaseActivity {
                 handler.postDelayed(task, 3000);
                 Log.v("test","current index is"+currentPos);
             } else {
-                // 如果处于拖拽状态停止自动播放，会每隔2秒检查一次是否可以正常自动播放。
-                handler.postDelayed(task, 2000);
+                // 如果处于拖拽状态停止自动播放，会每隔5秒检查一次是否可以正常自动播放。
+                handler.postDelayed(task, 5000);
             }
         }
     };
@@ -274,9 +274,12 @@ public class MainActivity extends BaseActivity {
                 // 以下实现无限滚动
                 if(position>LAST_ITEM_INDEX){
                     currentPos=FIRST_ITEM_INDEX;
+
                 }else if(position<FIRST_ITEM_INDEX){
                     currentPos=LAST_ITEM_INDEX;
+
                 }
+
             }
 
             @Override
@@ -291,8 +294,6 @@ public class MainActivity extends BaseActivity {
                     case 2:// 页面在执行滑动，手指已离开
                         isAuto=true;
                         break;
-
-
                 }
             }
         });
@@ -348,10 +349,9 @@ public class MainActivity extends BaseActivity {
 
 
 
-    /**
-     * 添加 或者  删除  商品发送的消息处理
-     * @param event
-     */
+
+     //添加 或者  删除  商品发送的消息处理
+
     @Subscribe()
     public void onMessageEvent(MessageEvent event) {
 

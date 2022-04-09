@@ -95,6 +95,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
         mGoodsCateGoryList.setLayoutManager(new LinearLayoutManager(getContext()));
         mGoodsCateGoryList.setAdapter(mGoodsCategoryListAdapter);
         mGoodsCategoryListAdapter.setOnItemClickListener(new RecycleGoodsCategoryListAdapter.OnItemClickListener() {
+            //处理左侧栏分类点击 快速定位右边属于该类的商品
             @Override
             public void onItemClick(View view, int position) {
                 ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(titlePois.get(position),0);
@@ -107,6 +108,8 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
         recyclerView.setLayoutManager(mLinearLayoutManager);
         personAdapter = new PersonAdapter(getActivity(),goodsitemEntities,goodscategoryEntities);
         personAdapter.setmActivity(getActivity());
+
+        // 右边每一个类别的头部横栏标题适配
         headerAdapter=new BigramHeaderAdapter(getActivity(),goodsitemEntities,goodscategoryEntities);
         top = new StickyHeadersBuilder()
                 .setAdapter(personAdapter)
@@ -124,6 +127,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                // 滚动商品时，顶部标题总保持当前上方的商品的类别名
                 super.onScrolled(recyclerView, dx, dy);
                 for (int i=0;i<titlePois.size();i++){
                     if(mLinearLayoutManager.findFirstVisibleItemPosition()>= titlePois.get(i)){
@@ -157,7 +161,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
     }
 
     /**
-     * 处理滑动 是两个ListView联动
+     * 处理滑动 是两个ListView联动，右侧的滑动同时带动左侧分类栏的变化
      */
     private class MyOnGoodsScrollListener implements AbsListView.OnScrollListener {
 

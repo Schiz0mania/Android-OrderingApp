@@ -8,6 +8,11 @@ import java.util.List;
  * Created by xhh on 2022/4/2.
  */
 
+
+/*
+* PersonAdapter完成购物车修改后发给MainActivity修改对应购物车布局
+*
+* */
 public class MessageEvent {
     public int  totalnum;
     public int  totalprice;

@@ -51,7 +51,7 @@ public class RecycleGoodsCategoryListAdapter extends RecyclerView.Adapter<Recycl
             holder.shopCartNum.setVisibility(View.GONE);
         }
 
-        if (selectPosition != -1) {
+        if (selectPosition != -1) {//左侧栏定位的选中与未选中的动画处理
             if (selectPosition == position) {
                 holder.root.setBackgroundResource(R.drawable.goods_category_list_bg_select);
             } else {

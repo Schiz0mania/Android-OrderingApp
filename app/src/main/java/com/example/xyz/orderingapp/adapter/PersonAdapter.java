@@ -51,7 +51,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     private ImageView buyImg;
     private List<GoodsListBean.DataEntity.GoodscategoryEntity> goodscategoryEntities;
     private String[] mSectionLetters;
-    private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> selectGoods=new ArrayList<>(); // 保存用户购买的商品类个例
+    private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> selectGoods=new ArrayList<>(); // 保存用户添加的商品类个例
 
 
     public PersonAdapter(Context context, List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> items
@@ -221,6 +221,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
         //设置价格
         holder.tvGoodsPrice.setText("¥"+dataList.get(position).getPrice());
 
+        //加载图片
         Glide
                 .with(mContext)
                 .load(id[position])
@@ -305,7 +306,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                         holder.tvGoodsSelectNum.setVisibility(View.GONE);
                         holder.scaleBtn.setVisibility((View.GONE));
                     }
-                    changeShopCart(position,-1);//----------------------------------------------------------
+                    changeShopCart(position,-1);
                     if(mOnGoodsNunChangeListener!=null)
                         mOnGoodsNunChangeListener.onNumChange();
                 }
@@ -390,8 +391,11 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
      * 修改购物车状态
      */
     private void changeShopCart(int index,int type) {
+        // 修改下方shopcart
         EventBus.getDefault().post(new MessageEvent(buyNum,totalPrice,dataList,index,type,goodsNum));
+        // 修改侧栏每个分类购买数量
         EventBus.getDefault().post(new GoodsListEvent(mGoodsCategoryBuyNums));
+
         if(shopCart==null)return;
         if (buyNum > 0) {
             shopCart.setVisibility(View.VISIBLE);
