@@ -39,8 +39,9 @@
                     android:layout_weight="1"
                     android:text="菜名"
                     android:textColor="@color/color_333"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:autoSizeTextType="uniform"/>
 
                 <TextView
                     android:id="@+id/GoodsPrice"
