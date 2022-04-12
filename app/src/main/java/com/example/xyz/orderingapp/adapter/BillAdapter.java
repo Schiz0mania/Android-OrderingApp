@@ -103,7 +103,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{
         //获取单个购买量
         holder.Quantity.setText("×"+goodsNum.get(position));
         //获取规格
-        if(dataList.get(position).getcIndex()!=888)
+        if(dataList.get(position).isMoreStandard())
         {
             holder.Specification.setText(dataList.get(position).getSpecifications()[dataList.get(position).getcIndex()]);
         }

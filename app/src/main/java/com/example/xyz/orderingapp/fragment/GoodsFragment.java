@@ -86,6 +86,10 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
                 }
                 j++;
                 goodsitemEntity.setId(i);
+                if(goodsitemEntity.isMoreStandard()){
+                    goodsitemEntity.setcIndex(0); // 添加默认值
+                }
+
                 goodsitemEntities.add(goodsitemEntity);
             }
             i++;

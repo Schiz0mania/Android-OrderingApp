@@ -79,7 +79,7 @@ public class GoodsListBean implements Serializable {
                 private String goodsImgUrl;
                 private boolean moreStandard;
                 private String[] specifications;
-                private int cIndex ;  // 对应上面选择的规格值
+                private int cIndex;  // 对应上面选择的规格值
 
                 public int getId() {
                     return id;
