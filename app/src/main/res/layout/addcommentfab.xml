@@ -5,12 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|end"
     android:layout_margin="@dimen/fab_margin"
-    app:srcCompat="@mipmap/add"
-    android:background="@color/transparent"
+    app:backgroundTint="@color/lightbule"
+    android:src="@mipmap/add"
     android:clickable="true"
-
-
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     />

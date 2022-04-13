@@ -27,10 +27,10 @@ public class Evaluation {
 
     }
 
-    public static class Comment{// 用户名，用户评论，是否最新发布（相对于本次启动而言）
-        private String name ;
-        private String comments;
-        private boolean isNewPosted;
+    public static class Comment{
+        private String name ;  // 用户名
+        private String comments;  // 对应评论
+        private boolean isNewPosted;  // 是否为本次启动期间发布，用于后续删除操作
         public Comment(){
 
         }
