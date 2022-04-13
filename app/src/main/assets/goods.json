@@ -7,7 +7,6 @@
             "name": "牛腩牛杂双拼套餐",
             "price": 28,
             "introduce": "最新鲜的食材给最好的你",
-            "goodsImgUrl": "http://i.imgur.com/idojSYm.png",
             "moreStandard": true,
             "specifications": [ "微辣", "中辣", "重辣" ]
           },
@@ -15,7 +14,6 @@
             "name": "口水鸡套餐",
             "price": 26,
             "introduce": "口水鸡里的口水呢，我不到啊",
-            "goodsImgUrl": "",
             "moreStandard": true,
             "specifications": [ "微麻", "中麻", "重麻" ]
           },
@@ -23,14 +21,12 @@
             "name": "烤肉拌饭套餐",
             "price": 24,
             "introduce": "太阳烤的，纯绿色捏",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "炸鸡快乐桶",
             "price": 42,
             "introduce": "左旋溜达鸡，没说就是零卡",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           }
         ],
@@ -45,28 +41,24 @@
             "name": "凉拌黄瓜",
             "price": 12,
             "introduce": "啊吧啊吧，好7",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "西葫芦炒鸡蛋",
             "price": 12,
             "introduce": "是的，是七娃，我有罪",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "素炒西兰花",
             "price": 12,
             "introduce": "减脂修行必备",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "地三鲜",
             "price": 12,
             "introduce": "没有鱼，没有羊",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           }
         ],
@@ -81,28 +73,24 @@
             "name": "蟹黄煲",
             "price": 18,
             "introduce": "正宗的，花了大价钱从痞老板那买的",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "烤鸡",
             "price": 20,
             "introduce": "它生前活得很自在，就是有点中暑了",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "番茄意面",
             "price": 12,
             "introduce": "我用手掰的意面，别介意",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "薯条",
             "price": 12,
             "introduce": "没骚话了，好吃就完了",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           }
         ],
@@ -117,14 +105,12 @@
             "name": "米饭",
             "price": 5,
             "introduce": "老鼠爱大米",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "水饺",
             "price": 10,
             "introduce": "好吃不如20个大饺子",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": true,
             "specifications": [ "野菜猪肉", "豇豆猪肉", "虾仁三鲜" ]
           },
@@ -132,21 +118,18 @@
             "name": "炒面",
             "price": 8,
             "introduce": "吸溜吸溜的得劲",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "牛肉面",
             "price": 9,
             "introduce": "肉是兰州拉面师傅切的，真的管饱",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "烧饼",
             "price": 2,
             "introduce": "现贴现烤的，可以当飞盘",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": true,
             "specifications": [ "甜", "咸" ]
           }
@@ -162,35 +145,30 @@
           "name": "82雪碧",
           "price": 10,
           "introduce": "其实是72年的",
-          "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "哇哈哈AD钙奶",
           "price": 5,
           "introduce": "童年味道我知道",
-          "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "快乐水",
           "price": 6,
           "introduce": "听说你不快乐？",
-          "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "脉动",
           "price": 7,
           "introduce": "脉动回来",
-          "goodsImgUrl": "xxxxx",
           "moreStandard": false
         },
         {
           "name": "怡宝",
           "price": 3,
           "introduce": "官方指定一氧化二氢原料",
-          "goodsImgUrl": "xxxxx",
           "moreStandard": false
         }
       ],
@@ -205,28 +183,24 @@
             "name": "虎皮卷",
             "price": 15,
             "introduce": "芋泥夹心好7",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "蛋挞",
             "price": 6,
             "introduce": "正宗葡式蛋挞",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "榴莲千层",
             "price": 20,
             "introduce": "老八秘制小千层，真不臭",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           },
           {
             "name": "酸奶补丁",
             "price": 8,
             "introduce": "真没加老皮鞋",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": true,
             "specifications": [ "原味", "香蕉", "芒果","草莓" ]
           },
@@ -234,7 +208,6 @@
             "name": "蔓越莓麻薯",
             "price": 4,
             "introduce": "谢谢惠顾哦",
-            "goodsImgUrl": "xxxxx",
             "moreStandard": false
           }
         ],

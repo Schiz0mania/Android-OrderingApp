@@ -33,9 +33,10 @@ public class GoodsListBean implements Serializable {
 
         public static class GoodscategoryEntity {
 
-            private String name;
-            private int buyNum;
-            private List<GoodsitemEntity> goodsitem;
+            private String name; // 类别名
+            private int buyNum; // 单个类别购买数量
+            private List<GoodsitemEntity> goodsitem; // 每个类别对应的商品lsit
+
 
             public String getName() {
                 return name;
@@ -62,23 +63,16 @@ public class GoodsListBean implements Serializable {
             }
 
             public static class GoodsitemEntity {
-                /**
-                 * id：1   后续数据适配的id
-                 * name : 苹果
-                 * price : 10
-                 * introduce : 苹果好吃啊，很甜！
-                 * goodsImgUrl : ""
-                 * moreStandard : false  后续选规格参数，是否能选规格
-                 * specifications : ["微辣","中辣","重辣"]
-                 * cIndex : 0   对应上面的选中的下标值
-                 */
-                private int id;
-                private String name;
-                private int price;
-                private String introduce;
-                private String goodsImgUrl;
-                private boolean moreStandard;
-                private String[] specifications;
+
+                private int id; // 后续数据适配的id
+
+                private String name; // 菜名
+                private int price; // 价格
+                private String introduce; //介绍
+
+
+                private boolean moreStandard; //后续选规格参数，是否能选规格
+                private String[] specifications; // 规格数组，例子：["微辣","中辣","重辣"]
                 private int cIndex;  // 对应上面选择的规格值
 
                 public int getId() {
@@ -113,13 +107,6 @@ public class GoodsListBean implements Serializable {
                     this.introduce = introduce;
                 }
 
-                public String getGoodsImgUrl() {
-                    return goodsImgUrl;
-                }
-
-                public void setGoodsImgUrl(String goodsImgUrl) {
-                    this.goodsImgUrl = goodsImgUrl;
-                }
 
                 public boolean isMoreStandard() {
                     return moreStandard;
