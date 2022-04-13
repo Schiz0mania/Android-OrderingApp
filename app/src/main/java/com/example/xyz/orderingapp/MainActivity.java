@@ -499,6 +499,8 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, BillActivity.class);
                 MainActivity.this.startActivity(intent);
+                commentFragment.onDestroy();
+
             }
             else
             {

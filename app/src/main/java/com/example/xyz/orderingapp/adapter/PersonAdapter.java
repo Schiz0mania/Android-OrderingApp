@@ -191,23 +191,34 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final int id[] = {R.drawable.nnnzb,
+        final int id[] = {
+                R.drawable.nnnzb,
                 R.drawable.ksj,
                 R.drawable.krbf,
                 R.drawable.zjklt,
+
                 R.drawable.lbhg,
                 R.drawable.xhlcjd,
                 R.drawable.scxlh,
                 R.drawable.dsx,
+
                 R.drawable.xhb,
                 R.drawable.zj,
                 R.drawable.fqym,
                 R.drawable.st,
+
+                R.drawable.mf,
+                R.drawable.sj,
+                R.drawable.cm,
+                R.drawable.nrm,
+                R.drawable.sb,
+
                 R.drawable.xb,
                 R.drawable.adn,
                 R.drawable.cole,
                 R.drawable.md,
                 R.drawable.yb,
+
                 R.drawable.hpj,
                 R.drawable.psdt,
                 R.drawable.llqc,
