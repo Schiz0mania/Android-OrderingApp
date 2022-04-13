@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by xhh on 2022/4/2.
+ * Created by xyz on 2022/3/28.
  */
 
 public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopCartGoodsChangeListener, OnHeaderClickListener {

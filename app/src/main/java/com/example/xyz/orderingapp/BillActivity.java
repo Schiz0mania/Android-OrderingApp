@@ -29,6 +29,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import android.widget.Toast;
 
 
+
+
 public class BillActivity extends BaseActivity {
 
     private BillAdapter billAdapter;

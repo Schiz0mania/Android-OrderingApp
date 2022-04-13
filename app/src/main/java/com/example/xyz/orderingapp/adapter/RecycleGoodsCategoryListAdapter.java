@@ -13,7 +13,7 @@ import com.example.xyz.orderingapp.entity.GoodsListBean;
 import java.util.List;
 
 /**
- * Created by xhh on 2022/4/2.
+ * Created by xyz on 2022/3/25.
  */
 
 public class RecycleGoodsCategoryListAdapter extends RecyclerView.Adapter<RecycleGoodsCategoryListAdapter.ViewHolder>{

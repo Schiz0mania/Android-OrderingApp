@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * Created by xhh on 2022/4/2.
+ * Created by xyz on 2022/3/21.
  */
 
 public class BaseFragment extends Fragment {

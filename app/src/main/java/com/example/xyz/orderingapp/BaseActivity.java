@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by xhh on 2022/4/2.
+ * Created by xyz on 2022/3/19.
  */
 
 public class BaseActivity extends AppCompatActivity {

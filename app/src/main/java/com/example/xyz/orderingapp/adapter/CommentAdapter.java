@@ -20,7 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 /**
- * Created by xhh on 2022/4/5.
+ * Created by xyz on 2022/4/1.
  */
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> implements ItemTouchHelperAdapter{

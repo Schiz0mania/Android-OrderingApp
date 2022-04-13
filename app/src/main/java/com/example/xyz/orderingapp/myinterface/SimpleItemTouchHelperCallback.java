@@ -6,7 +6,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import com.example.xyz.orderingapp.adapter.CommentAdapter;
 
 /**
- * Created by xhh on 2022/4/6.
+ * Created by xyz on 2022/4/6.
  */
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {

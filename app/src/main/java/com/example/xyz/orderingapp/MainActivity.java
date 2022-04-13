@@ -52,6 +52,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainActivity extends BaseActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout; // 滑动展示
     private AppBarLayout appBarLayout;// 与上一个collapsingbar联动使用

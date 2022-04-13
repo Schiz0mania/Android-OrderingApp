@@ -7,7 +7,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 
 /**
- * Created by xhh on 2022/4/2.
+ * Created by xyz on 2022/3/30.
  */
 
 public class AnimationUtil {

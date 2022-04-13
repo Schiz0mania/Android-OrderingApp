@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by xhh on 2022/4/2.
+ * Created by qw on 2022/3/29.
  */
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder>{

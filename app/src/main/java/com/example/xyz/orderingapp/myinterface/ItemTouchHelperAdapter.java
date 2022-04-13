@@ -1,7 +1,7 @@
 package com.example.xyz.orderingapp.myinterface;
 
 /**
- * Created by xhh on 2022/4/6.
+ * Created by xyz on 2022/4/6.
  */
 
 public interface ItemTouchHelperAdapter {
