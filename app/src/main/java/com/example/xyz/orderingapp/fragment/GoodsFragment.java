@@ -45,10 +45,11 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
     //商品列表
     private List<GoodsListBean.DataEntity.GoodscategoryEntity.GoodsitemEntity> goodsitemEntities=new ArrayList<>();
 
-    //存储含有标题的第一个含有商品类别名称的条目的下标 - 即每个类别的第一个商品的下标
+    //存储每个类别的第一个商品的下标
     private List<Integer> titlePois = new ArrayList<>();
     //上一个标题的小标
     private int lastTitlePoi;
+
     private RecyclerView recyclerView;
     private PersonAdapter personAdapter;
     private StickyHeadersItemDecoration top;
@@ -81,7 +82,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
                     dataItem.getGoodscategory().getGoodsitem()
                     ) {             //j   ---- 针对同一类别内的商品
                 if (isFirst) {
-                    titlePois.add(j);
+                    titlePois.add(j); // 加入某类别第一个商品的id
                     isFirst = false;
                 }
                 j++;
@@ -95,6 +96,7 @@ public class GoodsFragment extends BaseFragment implements PersonAdapter.OnShopC
             i++;
         }
 
+        // 类别栏适配
         mGoodsCategoryListAdapter = new RecycleGoodsCategoryListAdapter(goodscategoryEntities, getActivity());
         mGoodsCateGoryList.setLayoutManager(new LinearLayoutManager(getContext()));
         mGoodsCateGoryList.setAdapter(mGoodsCategoryListAdapter);

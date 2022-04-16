@@ -17,6 +17,7 @@ import java.util.List;
  */
 
 public class RecycleGoodsCategoryListAdapter extends RecyclerView.Adapter<RecycleGoodsCategoryListAdapter.ViewHolder>{
+    //左侧类别栏适配器
 
     //当前选中的位置
     private int selectPosition;
@@ -44,6 +45,7 @@ public class RecycleGoodsCategoryListAdapter extends RecyclerView.Adapter<Recycl
     public void onBindViewHolder(RecycleGoodsCategoryListAdapter.ViewHolder holder, final int position) {
         holder.goodsCategoryName.setText(dataList.get(position).getName());
         holder.shopCartNum.setText(String.valueOf(dataList.get(position).getBuyNum()));
+
         if(dataList.get(position).getBuyNum()>0){
             holder.shopCartNum.setVisibility(View.VISIBLE);
 
