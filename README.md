@@ -12,11 +12,11 @@
 - [B19030513](https://github.com/Schiz0mania)：2，3，4，7
 - [B19030516](https://github.com/qiweipika)：1，5，6，8
 ## 程序apk
-src:
+- [apk在这](./App_apk/app-debug.apk)
 
 ## 功能演示
 - 能做什么
-	- 启动App，载入等待页面
+	- 启动App，载入欢迎页面
 	- 主页面支持评论+点菜
 	- 点菜后进入提交页面，获得随机优惠并生成自己的订单。
 
@@ -27,7 +27,7 @@ src:
 - 评论区功能演示（7功能实现）
 	- ![image](./gifs/B19030513评论测试.gif)
 
-## 
+
 
 
    
