@@ -10,7 +10,7 @@
 8. 上述功能需要在Android系统上实现演示（必选）。
 ## 分工详细
 - [B19030513](https://github.com/Schiz0mania)：2，3，4，7
-- [B19030516](https://github.com/qiweipika)：1，5，6，8
+- [B19030515](https://github.com/qiweipika)：1，5，6，8
 ## 程序apk
 - [apk在这](./App_apk/app-debug.apk)
 
