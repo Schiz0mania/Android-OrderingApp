@@ -201,9 +201,6 @@ public class MainActivity extends BaseActivity {
 
 
 
-
-
-
     private void setViewPager() {
 
         goodsFragment=new GoodsFragment();
@@ -387,7 +384,7 @@ public class MainActivity extends BaseActivity {
 
 
     /**
-     * 设置动画（点击添加商品）
+     * 设置动画（抛物线添加商品）
      * @param v
      * @param startLocation
      */

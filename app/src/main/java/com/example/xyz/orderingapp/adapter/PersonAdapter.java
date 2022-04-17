@@ -84,19 +84,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
         }
 
     }
-    /**
-     * 开始动画
-     * @param view
-     */
-    private void startAnim(View view) {
-        buyImg = new ImageView(mActivity);
-        buyImg.setBackgroundResource(R.mipmap.icon_goods_add_item);// 设置buyImg的图片
-        int[] loc = new int[2];
-        view.getLocationInWindow(loc);
-        int[] startLocation = new int[2];// 一个整型数组，用来存储按钮的在屏幕的X、Y坐标
-        view.getLocationInWindow(startLocation);// 这是获取购买按钮的在屏幕的X、Y坐标（这也是动画开始的坐标）
-        ((MainActivity)mActivity).setAnim(buyImg, startLocation);// 开始执行动画
-    }
 
     /**
      * 判断商品是否有添加到购物车中
@@ -356,6 +343,21 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     public int getItemCount() {
         return dataList.size();
     }
+
+    /**
+     * 开始动画:抛物线添加商品
+     * @param view
+     */
+    private void startAnim(View view) {
+        buyImg = new ImageView(mActivity);
+        buyImg.setBackgroundResource(R.mipmap.icon_goods_add_item);// 设置buyImg的图片
+        int[] loc = new int[2];
+        view.getLocationInWindow(loc);
+        int[] startLocation = new int[2];// 一个整型数组，用来存储按钮的在屏幕的X、Y坐标
+        view.getLocationInWindow(startLocation);// 这是获取购买按钮的在屏幕的X、Y坐标（这也是动画开始的坐标）
+        ((MainActivity)mActivity).setAnim(buyImg, startLocation);// 开始执行动画
+    }
+
     /**
      * 显示减号的动画
      * @return

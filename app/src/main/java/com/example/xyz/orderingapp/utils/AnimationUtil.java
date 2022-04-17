@@ -10,7 +10,7 @@ import android.view.animation.TranslateAnimation;
  * Created by xyz on 2022/3/30.
  */
 
-public class AnimationUtil {
+public class AnimationUtil { // 主页面商品页与评论页转换的动画
     //弹入动画时间
     public final static int ANIMATION_IN_TIME=400;
     //弹出动画时间
